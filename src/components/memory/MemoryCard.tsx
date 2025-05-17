@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-export interface Memory {
+export interface Imprint {
   id: string;
   title: string;
   description: string;
@@ -16,12 +16,12 @@ export interface Memory {
   relationships?: string[];
 }
 
-interface MemoryCardProps {
-  memory: Memory;
+interface ImprintCardProps {
+  imprint: Imprint;
   className?: string;
 }
 
-export const MemoryCard = ({ memory, className }: MemoryCardProps) => {
+export const ImprintCard = ({ imprint, className }: ImprintCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const privacyIndicator = {
@@ -30,12 +30,12 @@ export const MemoryCard = ({ memory, className }: MemoryCardProps) => {
     family: { icon: "👪", label: "Family Only" },
   };
 
-  const { icon, label } = privacyIndicator[memory.privacy];
+  const { icon, label } = privacyIndicator[imprint.privacy];
 
   return (
     <Card
       className={cn(
-        "memory-card overflow-hidden h-full",
+        "imprint-card overflow-hidden h-full",
         className
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -43,8 +43,8 @@ export const MemoryCard = ({ memory, className }: MemoryCardProps) => {
     >
       <div className="relative h-48 overflow-hidden">
         <img
-          src={memory.imageUrl}
-          alt={memory.title}
+          src={imprint.imageUrl}
+          alt={imprint.title}
           className={cn(
             "w-full h-full object-cover transition-transform duration-500",
             isHovered && "scale-105"
@@ -58,14 +58,14 @@ export const MemoryCard = ({ memory, className }: MemoryCardProps) => {
         </div>
       </div>
       <CardHeader className="p-4 pb-0">
-        <h3 className="text-lg font-semibold line-clamp-1">{memory.title}</h3>
-        <p className="text-sm text-muted-foreground">{new Date(memory.date).toLocaleDateString()}</p>
+        <h3 className="text-lg font-semibold line-clamp-1">{imprint.title}</h3>
+        <p className="text-sm text-muted-foreground">{new Date(imprint.date).toLocaleDateString()}</p>
       </CardHeader>
       <CardContent className="p-4">
-        <p className="text-sm line-clamp-2">{memory.description}</p>
+        <p className="text-sm line-clamp-2">{imprint.description}</p>
       </CardContent>
       <CardFooter className="p-4 pt-0 flex flex-wrap gap-2">
-        {memory.tags.map((tag) => (
+        {imprint.tags.map((tag) => (
           <Badge key={tag} variant="outline" className="bg-muted/50 text-xs">
             {tag}
           </Badge>

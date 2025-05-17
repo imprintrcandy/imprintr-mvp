@@ -1,9 +1,9 @@
 
-import { Memory } from "@/components/memory/MemoryCard";
+import { Imprint } from "@/components/memory/MemoryCard";
 
-export const SAMPLE_MEMORIES: Memory[] = [
+export const SAMPLE_IMPRINTS: Imprint[] = [
   {
-    id: "memory-1",
+    id: "imprint-1",
     title: "Our Wedding Day",
     description: "The happiest day of our lives, surrounded by family and friends at the beach ceremony.",
     date: "2022-06-15",
@@ -14,7 +14,7 @@ export const SAMPLE_MEMORIES: Memory[] = [
     relationships: ["spouse of Sarah"]
   },
   {
-    id: "memory-2",
+    id: "imprint-2",
     title: "Hiking the Pacific Crest Trail",
     description: "The sense of accomplishment after completing a 2-month section of the PCT through California.",
     date: "2021-08-10",
@@ -24,7 +24,7 @@ export const SAMPLE_MEMORIES: Memory[] = [
     location: "Pacific Crest Trail, California",
   },
   {
-    id: "memory-3",
+    id: "imprint-3",
     title: "Dad's 60th Birthday",
     description: "Surprised Dad with a family reunion for his 60th. First time all siblings were together in 5 years.",
     date: "2021-11-22",
@@ -35,7 +35,7 @@ export const SAMPLE_MEMORIES: Memory[] = [
     relationships: ["child of Robert", "sibling of Emma"]
   },
   {
-    id: "memory-4",
+    id: "imprint-4",
     title: "First Marathon Completion",
     description: "Crossing the finish line after months of training. Never thought I could push myself this far.",
     date: "2023-04-18",
@@ -45,7 +45,7 @@ export const SAMPLE_MEMORIES: Memory[] = [
     location: "Boston, Massachusetts",
   },
   {
-    id: "memory-5",
+    id: "imprint-5",
     title: "Moving into Our First Home",
     description: "Finally a place to call our own after years of saving. The beginning of a new chapter together.",
     date: "2023-01-05",
@@ -56,9 +56,9 @@ export const SAMPLE_MEMORIES: Memory[] = [
     relationships: ["spouse of Sarah"]
   },
   {
-    id: "memory-6",
+    id: "imprint-6",
     title: "Saying Goodbye to Grandma",
-    description: "A difficult day, but filled with beautiful memories and stories shared by family members.",
+    description: "A difficult day, but filled with beautiful imprints and stories shared by family members.",
     date: "2022-02-28",
     imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3",
     tags: ["Grief", "Family", "Reflection"],

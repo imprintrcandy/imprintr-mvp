@@ -14,8 +14,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Memory } from "./MemoryCard";
+import { Imprint } from "./MemoryCard";
 import { toast } from "@/components/ui/sonner";
+import { Badge } from "@/components/ui/badge";
 
 const EMOTIONAL_TAGS = [
   "Joy", "Growth", "Grief", "Family", "Gratitude", "Love",
@@ -27,12 +28,12 @@ const RELATIONSHIP_TYPES = [
   "mentored by", "mentor to", "partner of", "colleague of"
 ];
 
-interface MemoryFormProps {
-  onSave: (memory: Memory) => void;
+interface ImprintFormProps {
+  onSave: (imprint: Imprint) => void;
   folders?: string[];
 }
 
-export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", "Travel", "Growth"] }: MemoryFormProps) => {
+export const ImprintForm = ({ onSave, folders = ["Family", "Self-love", "Grief", "Travel", "Growth"] }: ImprintFormProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
@@ -87,21 +88,21 @@ export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", 
 
   const handleSave = () => {
     if (!title) {
-      toast.error("Please enter a title for your memory.");
+      toast.error("Please enter a title for your imprint.");
       return;
     }
     
     if (!date) {
-      toast.error("Please select a date for your memory.");
+      toast.error("Please select a date for your imprint.");
       return;
     }
 
     if (!imageUrl) {
-      toast.error("Please upload an image for your memory.");
+      toast.error("Please upload an image for your imprint.");
       return;
     }
 
-    const newMemory: Memory = {
+    const newImprint: Imprint = {
       id: Date.now().toString(),
       title,
       description,
@@ -113,8 +114,8 @@ export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", 
       relationships,
     };
 
-    onSave(newMemory);
-    toast.success("Memory saved successfully!");
+    onSave(newImprint);
+    toast.success("Imprint saved successfully!");
     
     // Reset form
     setTitle("");
@@ -131,7 +132,7 @@ export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", 
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-2xl">Create New Memory</CardTitle>
+        <CardTitle className="text-2xl">Create New Imprint</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-2">
@@ -140,7 +141,7 @@ export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", 
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter a title for this memory"
+            placeholder="Enter a title for this imprint"
           />
         </div>
 
@@ -150,7 +151,7 @@ export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", 
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Share the story behind this memory..."
+            placeholder="Share the story behind this imprint..."
             rows={4}
           />
         </div>
@@ -184,7 +185,7 @@ export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", 
               <div className="relative h-24 w-24 rounded-md overflow-hidden">
                 <img
                   src={imageUrl}
-                  alt="Memory preview"
+                  alt="Imprint preview"
                   className="h-full w-full object-cover"
                 />
                 <Button
@@ -347,7 +348,7 @@ export const MemoryForm = ({ onSave, folders = ["Family", "Self-love", "Grief", 
       </CardContent>
       <CardFooter>
         <Button onClick={handleSave} className="w-full">
-          Save Memory
+          Save Imprint
         </Button>
       </CardFooter>
     </Card>

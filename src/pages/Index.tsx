@@ -28,7 +28,7 @@ const Index = () => {
             Where imprints live forever
           </h1>
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mb-10 animate-fade-in">
-            Create a digital sanctuary for your most meaningful memories, stories, and life experiences
+            Create a digital sanctuary for your most meaningful imprints, stories, and life experiences
           </p>
           <Button
             onClick={handleGetStarted}
@@ -63,7 +63,7 @@ const Index = () => {
       <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-3">
-            Your Digital Memory <span className="text-gradient">Passport</span>
+            Your Digital Imprint <span className="text-gradient">Passport</span>
           </h2>
           <p className="text-xl text-muted-foreground text-center max-w-3xl mx-auto mb-16">
             Preserve and organize your most meaningful life moments in one beautiful place
@@ -92,7 +92,7 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-display font-semibold mb-2">Capture Stories</h3>
               <p className="text-muted-foreground">
-                Write or record meaningful stories and attach photos to preserve your most precious memories
+                Write or record meaningful stories and attach photos to preserve your most precious imprints
               </p>
             </div>
 
@@ -115,7 +115,7 @@ const Index = () => {
                   <path d="M13.5 7.93a5.12 5.12 0 0 1 4.56 4.56" />
                 </svg>
               </div>
-              <h3 className="text-xl font-display font-semibold mb-2">Earn Memory Badges</h3>
+              <h3 className="text-xl font-display font-semibold mb-2">Earn Imprint Badges</h3>
               <p className="text-muted-foreground">
                 Collect badges that represent meaningful moments and experiences in your life's journey
               </p>
@@ -143,7 +143,7 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-display font-semibold mb-2">Share Your Legacy</h3>
               <p className="text-muted-foreground">
-                Connect with loved ones by sharing your memories and creating a lasting emotional legacy
+                Connect with loved ones by sharing your imprints and creating a lasting emotional legacy
               </p>
             </div>
           </div>
@@ -154,7 +154,7 @@ const Index = () => {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-3">
-            Collect Memory <span className="text-gradient">Badges</span>
+            Collect Imprint <span className="text-gradient">Badges</span>
           </h2>
           <p className="text-xl text-muted-foreground text-center max-w-3xl mx-auto mb-16">
             Earn badges through real-life experiences and showcase them on your digital passport
@@ -181,7 +181,7 @@ const Index = () => {
             Imprints That <span className="text-gradient">Moved</span> Others
           </h2>
           <p className="text-xl text-muted-foreground text-center max-w-3xl mx-auto mb-16">
-            See how Imprintr helps people preserve and share their most meaningful memories
+            See how Imprintr helps people preserve and share their most meaningful imprints
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -211,10 +211,10 @@ const Index = () => {
       <section className="bg-gradient-memory py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
-            Start Preserving Your Meaningful Memories
+            Start Preserving Your Meaningful Imprints
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
-            Join Imprintr today and create your digital sanctuary of memories that last forever
+            Join Imprintr today and create your digital sanctuary of imprints that last forever
           </p>
           <Button
             onClick={handleGetStarted}

@@ -4,33 +4,33 @@ import { Link } from "react-router-dom";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MemoryCard, Memory } from "@/components/memory/MemoryCard";
+import { ImprintCard, Imprint } from "@/components/memory/MemoryCard";
 import { BadgeCard } from "@/components/badge/BadgeCard";
 import { Button } from "@/components/ui/button";
-import { SAMPLE_MEMORIES } from "@/data/memories";
+import { SAMPLE_IMPRINTS } from "@/data/memories";
 import { BADGES } from "@/data/badges";
 import { SAMPLE_TESTIMONIALS } from "@/data/testimonials";
 
 const Passport = () => {
-  const [activeTab, setActiveTab] = useState("memories");
+  const [activeTab, setActiveTab] = useState("imprints");
 
   // In a real app, this would come from user data
   const firstName = localStorage.getItem("userFirstName") || "Jane";
   const lastName = localStorage.getItem("userLastName") || "Doe";
   const userProfile = {
     name: `${firstName} ${lastName}`,
-    bio: "Digital memory keeper, storyteller, and life explorer. I'm passionate about preserving meaningful moments and sharing the journey with loved ones.",
+    bio: "Digital imprint keeper, storyteller, and life explorer. I'm passionate about preserving meaningful moments and sharing the journey with loved ones.",
     avatarUrl: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3",
     location: "San Francisco, CA",
     featuredBadgeIds: ["badge-1", "badge-3", "badge-5"],
-    totalMemories: SAMPLE_MEMORIES.length,
+    totalImprints: SAMPLE_IMPRINTS.length,
     totalBadges: BADGES.filter(b => b.achieved).length,
   };
 
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-display font-bold mb-8">Digital Memory Passport</h1>
+        <h1 className="text-3xl font-display font-bold mb-8">Digital Imprint Passport</h1>
 
         <ProfileHeader
           {...userProfile}
@@ -40,8 +40,8 @@ const Passport = () => {
         <div className="mt-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid grid-cols-5 mb-8">
-              <TabsTrigger value="memories" className="font-medium">
-                Memories
+              <TabsTrigger value="imprints" className="font-medium">
+                Imprints
               </TabsTrigger>
               <TabsTrigger value="badges" className="font-medium">
                 Badges
@@ -57,9 +57,9 @@ const Passport = () => {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="memories" className="space-y-6">
+            <TabsContent value="imprints" className="space-y-6">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-display font-medium">Your Memories</h2>
+                <h2 className="text-2xl font-display font-medium">Your Imprints</h2>
                 <Link to="/new-memory">
                   <Button>
                     <svg
@@ -74,21 +74,21 @@ const Passport = () => {
                     >
                       <path d="M12 5v14M5 12h14" />
                     </svg>
-                    New Memory
+                    New Imprint
                   </Button>
                 </Link>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {SAMPLE_MEMORIES.map((memory) => (
-                  <MemoryCard key={memory.id} memory={memory} />
+                {SAMPLE_IMPRINTS.map((imprint) => (
+                  <ImprintCard key={imprint.id} imprint={imprint} />
                 ))}
               </div>
             </TabsContent>
 
             <TabsContent value="badges" className="space-y-6">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-display font-medium">Memory Badges</h2>
+                <h2 className="text-2xl font-display font-medium">Imprint Badges</h2>
                 <Button variant="outline">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +209,7 @@ const Passport = () => {
 
             <TabsContent value="challenges" className="space-y-6">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-display font-medium">Memory Challenges</h2>
+                <h2 className="text-2xl font-display font-medium">Imprint Challenges</h2>
                 <Button variant="outline">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -278,18 +278,18 @@ const Passport = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="border rounded-lg p-6">
                   <div className="flex justify-between items-start">
-                    <h4 className="text-lg font-semibold">First Memory Challenge</h4>
+                    <h4 className="text-lg font-semibold">First Imprint Challenge</h4>
                     <div className="text-xs text-white bg-accent px-2 py-1 rounded-full">
                       Completed
                     </div>
                   </div>
                   <p className="text-muted-foreground mt-2">
-                    Create your first 5 memories with photos and stories.
+                    Create your first 5 imprints with photos and stories.
                   </p>
                   <div className="mt-4">
                     <div className="flex justify-between text-sm mb-1">
                       <span>Progress</span>
-                      <span>5/5 memories</span>
+                      <span>5/5 imprints</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2.5">
                       <div className="bg-accent h-2.5 rounded-full w-full"></div>

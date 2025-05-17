@@ -23,7 +23,7 @@ export const BADGES: Badge[] = [
   {
     id: "badge-3",
     name: "World Traveler",
-    description: "Documented memories across 10 different countries",
+    description: "Documented imprints across 10 different countries",
     imageUrl: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3",
     progress: 100,
     achieved: true,
@@ -32,7 +32,7 @@ export const BADGES: Badge[] = [
   {
     id: "badge-4",
     name: "Love Story",
-    description: "Captured the growth of a relationship through 25 memories",
+    description: "Captured the growth of a relationship through 25 imprints",
     imageUrl: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3",
     progress: 40,
     achieved: false,
@@ -50,7 +50,7 @@ export const BADGES: Badge[] = [
   {
     id: "badge-6",
     name: "Legacy Builder",
-    description: "Created a detailed collection of memories to pass on to future generations",
+    description: "Created a detailed collection of imprints to pass on to future generations",
     imageUrl: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?ixlib=rb-4.0.3",
     progress: 30,
     achieved: false,
