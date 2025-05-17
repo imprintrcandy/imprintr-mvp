@@ -21,6 +21,28 @@ const About = () => {
               organized, and shared with those who matter most to you.
             </p>
             
+            <h2 className="text-2xl font-display font-semibold mt-12 mb-4">About The Founder</h2>
+            <div className="bg-muted/30 p-6 rounded-lg my-6 border border-border">
+              <div className="italic text-muted-foreground mb-4">
+                "I created Imprintr because I was terrified of being forgotten — and heartbroken by the memories I'd already lost. 
+                After grief, regret, and years of hiding, I realized: we don't just need a photo app. We need a sanctuary.
+              </div>
+              
+              <div className="italic text-muted-foreground mb-4">
+                Imprintr is that sanctuary — a platform where people can preserve stories that matter, earn memory badges from real-life moments, 
+                and receive testimonials from the lives they've touched. It's a digital memory passport where legacy, not likes, leads the way.
+              </div>
+              
+              <div className="italic text-muted-foreground mb-4">
+                This isn't just a journaling tool. It's a movement to honor healing, family, milestones, and meaning — all in one sacred space.
+              </div>
+              
+              <div className="italic text-muted-foreground">
+                Because when we lose people… or parts of ourselves…<br />
+                We still deserve a place where our imprints live forever."
+              </div>
+            </div>
+            
             <h2 className="text-2xl font-display font-semibold mt-12 mb-4">The Story Behind Imprintr</h2>
             <p>
               Imprintr was born from a deeply personal place. Our founder noticed how easily precious memories 
