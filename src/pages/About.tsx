@@ -44,17 +44,67 @@ const About = () => {
             </div>
             
             <h2 className="text-2xl font-display font-semibold mt-12 mb-4">The Story Behind Imprintr</h2>
-            <p>
-              Imprintr was born from a deeply personal place. Our founder noticed how easily precious memories 
-              slip away over time – the details of cherished moments fading, the emotions dulling, and the 
-              significance diminishing. After losing a close family member, she realized how many stories were 
-              lost forever.
-            </p>
-            <p className="mt-4">
-              What began as a personal project to record family stories transformed into a mission to help 
-              everyone preserve their most meaningful memories, achievements, and life lessons in a digital 
-              format that could be shared across generations.
-            </p>
+            
+            <div className="bg-[#F1F0FB] p-8 rounded-xl my-6 border border-[#9b87f5]/20 relative overflow-hidden">
+              <div className="absolute -top-12 -right-12 w-40 h-40 bg-[#FFDEE2]/20 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#9b87f5]/20 rounded-full blur-2xl"></div>
+              
+              <div className="relative z-10">
+                <h3 className="text-xl font-medium text-[#7E69AB] mb-4">A Journey Born from Loss</h3>
+                <p className="mb-6">
+                  Imprintr was born from a deeply personal place. Our founder noticed how easily precious memories 
+                  slip away over time – the details of cherished moments fading, the emotions dulling, and the 
+                  significance diminishing. After losing a close family member, she realized how many stories were 
+                  lost forever.
+                </p>
+                
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-1 h-16 bg-gradient-to-b from-[#9b87f5] to-[#FFDEE2]"></div>
+                  <p className="text-lg font-medium text-[#7E69AB] italic">
+                    "Every time I tried to recall my grandmother's voice or her favorite stories, the memories seemed to grow dimmer. 
+                    I realized that without a dedicated space to preserve these precious moments, they would eventually fade away completely."
+                  </p>
+                </div>
+                
+                <h3 className="text-xl font-medium text-[#7E69AB] mb-4">From Personal Project to Shared Mission</h3>
+                <p className="mb-6">
+                  What began as a personal project to record family stories transformed into a mission to help 
+                  everyone preserve their most meaningful memories, achievements, and life lessons in a digital 
+                  format that could be shared across generations.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+                  <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                    <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-3">
+                      <span className="text-[#7E69AB] text-xl font-bold">1</span>
+                    </div>
+                    <h4 className="font-medium mb-2">Recognition</h4>
+                    <p className="text-sm text-muted-foreground">Acknowledging the importance of preserving meaningful life moments</p>
+                  </div>
+                  
+                  <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                    <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-3">
+                      <span className="text-[#7E69AB] text-xl font-bold">2</span>
+                    </div>
+                    <h4 className="font-medium mb-2">Connection</h4>
+                    <p className="text-sm text-muted-foreground">Creating a platform that fosters deeper human connections through shared stories</p>
+                  </div>
+                  
+                  <div className="bg-white p-4 rounded-lg shadow-sm border border-[#9b87f5]/10">
+                    <div className="w-12 h-12 bg-[#9b87f5]/20 rounded-full flex items-center justify-center mb-3">
+                      <span className="text-[#7E69AB] text-xl font-bold">3</span>
+                    </div>
+                    <h4 className="font-medium mb-2">Legacy</h4>
+                    <p className="text-sm text-muted-foreground">Building a digital legacy that transcends generations and preserves what matters most</p>
+                  </div>
+                </div>
+                
+                <p>
+                  Today, Imprintr stands as a testament to the power of personal stories and their ability to connect us 
+                  across time and space, ensuring that the most meaningful parts of our lives are never forgotten.
+                </p>
+              </div>
+            </div>
             
             <h2 className="text-2xl font-display font-semibold mt-12 mb-4">How Imprintr Works</h2>
             <p>
