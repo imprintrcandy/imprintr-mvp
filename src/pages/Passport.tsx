@@ -7,8 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ImprintCard, Imprint } from "@/components/memory/MemoryCard";
 import { BadgeCard } from "@/components/badge/BadgeCard";
 import { Button } from "@/components/ui/button";
+import { WorldMap } from "@/components/map/WorldMap";
+import { ActivityFeed } from "@/components/activity/ActivityFeed";
+import { ChallengeCard } from "@/components/challenge/ChallengeCard";
+import { LegacyVault } from "@/components/legacy/LegacyVault";
 import { SAMPLE_IMPRINTS } from "@/data/memories";
 import { BADGES } from "@/data/badges";
+import { CHALLENGES } from "@/data/challenges";
 import { SAMPLE_TESTIMONIALS } from "@/data/testimonials";
 
 const Passport = () => {
@@ -39,7 +44,7 @@ const Passport = () => {
 
         <div className="mt-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid grid-cols-5 mb-8">
+            <TabsList className="grid grid-cols-7 mb-8">
               <TabsTrigger value="imprints" className="font-medium">
                 Imprints
               </TabsTrigger>
@@ -55,12 +60,18 @@ const Passport = () => {
               <TabsTrigger value="challenges" className="font-medium">
                 Challenges
               </TabsTrigger>
+              <TabsTrigger value="map" className="font-medium">
+                Memory Map
+              </TabsTrigger>
+              <TabsTrigger value="vault" className="font-medium">
+                Legacy Vault
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="imprints" className="space-y-6">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-display font-medium">Your Imprints</h2>
-                <Link to="/new-memory">
+                <Link to="/new-imprint">
                   <Button>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -208,98 +219,58 @@ const Passport = () => {
             </TabsContent>
 
             <TabsContent value="challenges" className="space-y-6">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-display font-medium">Imprint Challenges</h2>
-                <Button variant="outline">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 mr-2"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                  Browse Challenges
-                </Button>
+                <Link to="/challenges">
+                  <Button variant="outline">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 mr-2"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                    Browse Challenges
+                  </Button>
+                </Link>
               </div>
 
               <h3 className="text-xl font-medium">Active Challenges</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="border rounded-lg p-6">
-                  <div className="flex justify-between items-start">
-                    <h4 className="text-lg font-semibold">30 Days of Gratitude</h4>
-                    <div className="text-xs text-white bg-imprint-600 px-2 py-1 rounded-full">
-                      In Progress
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground mt-2">
-                    Document one thing you're grateful for each day for 30 days.
-                  </p>
-                  <div className="mt-4">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span>Progress</span>
-                      <span>15/30 days</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2.5">
-                      <div className="bg-imprint-600 h-2.5 rounded-full" style={{ width: '50%' }}></div>
-                    </div>
-                  </div>
-                  <Button className="w-full mt-4" variant="outline">Continue Challenge</Button>
-                </div>
-
-                <div className="border rounded-lg p-6">
-                  <div className="flex justify-between items-start">
-                    <h4 className="text-lg font-semibold">Family Photo Archive</h4>
-                    <div className="text-xs text-white bg-imprint-600 px-2 py-1 rounded-full">
-                      Just Started
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground mt-2">
-                    Digitize and document 50 family photos with stories.
-                  </p>
-                  <div className="mt-4">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span>Progress</span>
-                      <span>3/50 photos</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2.5">
-                      <div className="bg-imprint-600 h-2.5 rounded-full" style={{ width: '6%' }}></div>
-                    </div>
-                  </div>
-                  <Button className="w-full mt-4" variant="outline">Continue Challenge</Button>
-                </div>
+                {CHALLENGES.filter(c => c.status === "in-progress").slice(0, 2).map(challenge => (
+                  <ChallengeCard key={challenge.id} challenge={challenge} />
+                ))}
               </div>
 
               <h3 className="text-xl font-medium mt-8">Completed Challenges</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="border rounded-lg p-6">
-                  <div className="flex justify-between items-start">
-                    <h4 className="text-lg font-semibold">First Imprint Challenge</h4>
-                    <div className="text-xs text-white bg-accent px-2 py-1 rounded-full">
-                      Completed
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground mt-2">
-                    Create your first 5 imprints with photos and stories.
-                  </p>
-                  <div className="mt-4">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span>Progress</span>
-                      <span>5/5 imprints</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2.5">
-                      <div className="bg-accent h-2.5 rounded-full w-full"></div>
-                    </div>
-                  </div>
-                  <Button className="w-full mt-4" variant="outline">View Results</Button>
-                </div>
+                {CHALLENGES.filter(c => c.status === "completed").slice(0, 1).map(challenge => (
+                  <ChallengeCard key={challenge.id} challenge={challenge} />
+                ))}
               </div>
             </TabsContent>
+
+            <TabsContent value="map" className="space-y-6">
+              <WorldMap />
+              <div className="flex justify-center mt-4">
+                <Button variant="outline">View Full Travel History</Button>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="vault" className="space-y-6">
+              <LegacyVault />
+            </TabsContent>
           </Tabs>
+        </div>
+        
+        <div className="mt-10 space-y-6">
+          <h2 className="text-2xl font-display font-medium">Recent Activity</h2>
+          <ActivityFeed />
         </div>
       </div>
     </MainLayout>

@@ -10,7 +10,7 @@ interface ProfileHeaderProps {
   avatarUrl: string;
   location?: string;
   featuredBadgeIds: string[];
-  totalMemories: number;
+  totalImprints: number;
   totalBadges: number;
   isCurrentUser?: boolean;
 }
@@ -21,7 +21,7 @@ export const ProfileHeader = ({
   avatarUrl,
   location,
   featuredBadgeIds,
-  totalMemories,
+  totalImprints,
   totalBadges,
   isCurrentUser = false,
 }: ProfileHeaderProps) => {
@@ -64,7 +64,7 @@ export const ProfileHeader = ({
 
           <div className="mt-4 flex flex-wrap justify-center md:justify-start gap-3">
             <Badge variant="outline">
-              <span className="text-imprint-600 font-semibold mr-1">{totalMemories}</span> Memories
+              <span className="text-imprint-600 font-semibold mr-1">{totalImprints}</span> Imprints
             </Badge>
             <Badge variant="outline">
               <span className="text-memory-600 font-semibold mr-1">{totalBadges}</span> Badges
@@ -77,7 +77,7 @@ export const ProfileHeader = ({
                 Edit Profile
               </Button>
               <Button size="sm">
-                Create Memory
+                Create Imprint
               </Button>
             </div>
           ) : (

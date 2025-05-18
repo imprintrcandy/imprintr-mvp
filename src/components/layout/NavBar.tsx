@@ -1,192 +1,139 @@
-
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const isLanding = location.pathname === "/";
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Features", path: "/features" },
+    { name: "About", path: "/about" },
+    { name: "Challenges", path: "/challenges" },
+  ];
+
+  const authLinks = [
+    { name: "Login", path: "/login" },
+    { name: "Sign Up", path: "/signup", primary: true },
+  ];
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
-    <header className={`w-full z-50 ${isLanding ? "absolute top-0" : "bg-background border-b"}`}>
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex h-20 items-center justify-between">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/imprintrlogo.png" 
-                  alt="Imprintr Logo" 
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <span className={`text-2xl font-display ${isLanding ? "text-white" : "text-foreground"}`}>
-                Imprintr
-              </span>
-            </Link>
-          </div>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-primary">Imprintr</span>
+          </Link>
+        </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            {isAuthenticated ? (
-              <>
-                <Link 
-                  to="/passport" 
-                  className={`text-sm font-medium ${isLanding ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"}`}
-                >
-                  My Passport
-                </Link>
-                <Link 
-                  to="/imprints" 
-                  className={`text-sm font-medium ${isLanding ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"}`}
-                >
-                  Imprints
-                </Link>
-                <Link 
-                  to="/badges" 
-                  className={`text-sm font-medium ${isLanding ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"}`}
-                >
-                  Badges
-                </Link>
-                <Button 
-                  onClick={() => {
-                    localStorage.removeItem("isAuthenticated");
-                    window.location.href = "/";
-                  }}
-                  variant="outline" 
-                  className={isLanding ? "bg-white/10 text-white border-white/20 hover:bg-white/20" : ""}
-                >
-                  Sign Out
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                isActive(link.path)
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+              )}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Desktop Auth Buttons */}
+        <div className="hidden md:flex items-center gap-4">
+          {localStorage.getItem("userFirstName") ? (
+            <Link to="/passport">
+              <Button variant="default">My Passport</Button>
+            </Link>
+          ) : (
+            authLinks.map((link) => (
+              <Link key={link.path} to={link.path}>
+                <Button variant={link.primary ? "default" : "outline"}>
+                  {link.name}
                 </Button>
-              </>
-            ) : (
-              <>
-                <Link 
-                  to="/about" 
-                  className={`text-sm font-medium ${isLanding ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"}`}
+              </Link>
+            ))
+          )}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="outline" size="icon" aria-label="Menu">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-5 w-5"
+              >
+                <line x1="4" x2="20" y1="12" y2="12" />
+                <line x1="4" x2="20" y1="6" y2="6" />
+                <line x1="4" x2="20" y1="18" y2="18" />
+              </svg>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+            <nav className="flex flex-col gap-4 mt-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={closeMenu}
+                  className={cn(
+                    "text-lg font-medium transition-colors hover:text-primary py-2",
+                    isActive(link.path)
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  )}
                 >
-                  About
+                  {link.name}
                 </Link>
-                <Link 
-                  to="/features" 
-                  className={`text-sm font-medium ${isLanding ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"}`}
-                >
-                  Features
-                </Link>
-                <Link to="/login">
-                  <Button 
-                    variant="outline" 
-                    className={isLanding ? "bg-white/10 text-white border-white/20 hover:bg-white/20" : ""}
-                  >
-                    Log in
+              ))}
+              <div className="h-px bg-border my-4" />
+              {localStorage.getItem("userFirstName") ? (
+                <Link to="/passport" onClick={closeMenu}>
+                  <Button className="w-full" variant="default">
+                    My Passport
                   </Button>
                 </Link>
-                <Link to="/signup">
-                  <Button>Get Started</Button>
-                </Link>
-              </>
-            )}
-          </nav>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-foreground"
-            aria-label="Toggle menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className={isLanding ? "text-white" : ""}
-            >
-              {isMenuOpen ? (
-                <path d="M18 6L6 18M6 6l12 12" />
               ) : (
-                <path d="M3 12h18M3 6h18M3 18h18" />
+                authLinks.map((link) => (
+                  <Link key={link.path} to={link.path} onClick={closeMenu}>
+                    <Button
+                      className="w-full mb-2"
+                      variant={link.primary ? "default" : "outline"}
+                    >
+                      {link.name}
+                    </Button>
+                  </Link>
+                ))
               )}
-            </svg>
-          </button>
-        </div>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-background border-b">
-          <div className="container mx-auto px-4 py-4 space-y-3">
-            {isAuthenticated ? (
-              <>
-                <Link
-                  to="/passport"
-                  className="block text-foreground hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  My Passport
-                </Link>
-                <Link
-                  to="/imprints"
-                  className="block text-foreground hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Imprints
-                </Link>
-                <Link
-                  to="/badges"
-                  className="block text-foreground hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Badges
-                </Link>
-                <Button 
-                  onClick={() => {
-                    localStorage.removeItem("isAuthenticated");
-                    window.location.href = "/";
-                    setIsMenuOpen(false);
-                  }}
-                  variant="outline" 
-                  size="sm"
-                  className="w-full mt-2"
-                >
-                  Sign Out
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/about"
-                  className="block text-foreground hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  About
-                </Link>
-                <Link
-                  to="/features"
-                  className="block text-foreground hover:text-primary"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Features
-                </Link>
-                <div className="pt-2 flex flex-col space-y-2">
-                  <Link to="/login" onClick={() => setIsMenuOpen(false)} className="w-full">
-                    <Button variant="outline" className="w-full">Log in</Button>
-                  </Link>
-                  <Link to="/signup" onClick={() => setIsMenuOpen(false)} className="w-full">
-                    <Button className="w-full">Get Started</Button>
-                  </Link>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
     </header>
   );
 };

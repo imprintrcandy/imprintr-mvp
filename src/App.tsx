@@ -12,6 +12,7 @@ import NewImprint from "./pages/NewMemory";
 import About from "./pages/About";
 import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
+import Challenges from "./pages/Challenges";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/new-imprint" element={<NewImprint />} />
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />
+          <Route path="/challenges" element={<Challenges />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
