@@ -8,13 +8,17 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-memory flex items-center justify-center">
-                <span className="font-display text-white text-xl font-bold">I</span>
+              <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/imprintrlogo.png" 
+                  alt="Imprintr Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="text-2xl font-display text-foreground">Imprintr</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
-              Where imprints live forever. Capture, preserve, and share your most meaningful memories.
+              Where imprints live forever. Capture, preserve, and share your most meaningful imprints.
             </p>
           </div>
           

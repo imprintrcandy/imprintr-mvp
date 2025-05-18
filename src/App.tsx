@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Passport from "./pages/Passport";
-import NewMemory from "./pages/NewMemory";
+import NewImprint from "./pages/NewMemory";
 import About from "./pages/About";
 import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
@@ -26,7 +26,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/passport" element={<Passport />} />
-          <Route path="/new-memory" element={<NewMemory />} />
+          <Route path="/new-imprint" element={<NewImprint />} />
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

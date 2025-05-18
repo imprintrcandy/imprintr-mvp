@@ -15,8 +15,12 @@ export const NavBar = () => {
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-memory flex items-center justify-center">
-                <span className="font-display text-white text-xl font-bold">I</span>
+              <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/imprintrlogo.png" 
+                  alt="Imprintr Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className={`text-2xl font-display ${isLanding ? "text-white" : "text-foreground"}`}>
                 Imprintr
@@ -35,10 +39,10 @@ export const NavBar = () => {
                   My Passport
                 </Link>
                 <Link 
-                  to="/memories" 
+                  to="/imprints" 
                   className={`text-sm font-medium ${isLanding ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"}`}
                 >
-                  Memories
+                  Imprints
                 </Link>
                 <Link 
                   to="/badges" 
@@ -128,11 +132,11 @@ export const NavBar = () => {
                   My Passport
                 </Link>
                 <Link
-                  to="/memories"
+                  to="/imprints"
                   className="block text-foreground hover:text-primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Memories
+                  Imprints
                 </Link>
                 <Link
                   to="/badges"
