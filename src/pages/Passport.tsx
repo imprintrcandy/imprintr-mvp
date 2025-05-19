@@ -3,6 +3,7 @@ import { MainLayout } from "@/components/layout/MainLayout";
 import { ProfileHeader } from "@/components/profile/ProfileHeader";
 import { PassportTabs } from "@/components/passport/PassportTabs";
 import { ActivityFeed } from "@/components/activity/ActivityFeed";
+import { PassportDownload } from "@/components/passport/PassportDownload";
 import { SAMPLE_IMPRINTS } from "@/data/memories";
 import { BADGES } from "@/data/badges";
 import { CHALLENGES } from "@/data/challenges";
@@ -24,12 +25,23 @@ const Passport = () => {
 
   return (
     <MainLayout>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8" id="passport-content">
         <h1 className="text-3xl font-display font-bold mb-8">Digital Imprint Passport</h1>
 
         <ProfileHeader
           {...userProfile}
           isCurrentUser={true}
+        />
+
+        <PassportDownload
+          name={userProfile.name}
+          bio={userProfile.bio}
+          avatarUrl={userProfile.avatarUrl}
+          location={userProfile.location}
+          imprints={SAMPLE_IMPRINTS}
+          badges={BADGES}
+          challenges={CHALLENGES}
+          testimonials={SAMPLE_TESTIMONIALS}
         />
 
         <div className="mt-8">

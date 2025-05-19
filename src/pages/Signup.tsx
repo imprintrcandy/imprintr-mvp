@@ -13,6 +13,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [referralCode, setReferralCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -28,6 +29,14 @@ const Signup = () => {
         localStorage.setItem("isAuthenticated", "true");
         localStorage.setItem("userFirstName", firstName);
         localStorage.setItem("userLastName", lastName);
+        localStorage.setItem("userEmail", email);
+        localStorage.setItem("userReferrer", referralCode);
+        localStorage.setItem("userSignupDate", new Date().toISOString());
+        
+        // Generate unique referral code for this user
+        const userReferralCode = `${firstName.toLowerCase()}-${Math.random().toString(36).substring(2, 8)}`;
+        localStorage.setItem("userReferralCode", userReferralCode);
+        
         toast.success("Welcome to Imprintr! Your account has been created.");
         navigate("/passport");
       } else {
@@ -88,6 +97,15 @@ const Signup = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="referralCode">Were you invited by someone? (Optional)</Label>
+                  <Input
+                    id="referralCode"
+                    value={referralCode}
+                    onChange={(e) => setReferralCode(e.target.value)}
+                    placeholder="Enter referral code"
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>

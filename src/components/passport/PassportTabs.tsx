@@ -7,6 +7,7 @@ import { ImprintsMade } from "./ImprintsMade";
 import { ImprintsReceived } from "./ImprintsReceived";
 import { ChallengesList } from "./ChallengesList";
 import { MemoryMapView } from "./MemoryMapView";
+import { ReferralStatus } from "./ReferralStatus";
 import { LegacyVault } from "@/components/legacy/LegacyVault";
 import { Imprint } from "@/components/memory/MemoryCard";
 import { Badge } from "@/components/badge/BadgeCard";
@@ -25,7 +26,7 @@ export const PassportTabs = ({ imprints, badges, challenges, testimonials }: Pas
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <TabsList className="grid grid-cols-7 mb-8">
+      <TabsList className="grid grid-cols-8 mb-8">
         <TabsTrigger value="imprints" className="font-medium">
           Imprints
         </TabsTrigger>
@@ -43,6 +44,9 @@ export const PassportTabs = ({ imprints, badges, challenges, testimonials }: Pas
         </TabsTrigger>
         <TabsTrigger value="map" className="font-medium">
           Memory Map
+        </TabsTrigger>
+        <TabsTrigger value="referrals" className="font-medium">
+          Referrals
         </TabsTrigger>
         <TabsTrigger value="vault" className="font-medium">
           Legacy Vault
@@ -71,6 +75,10 @@ export const PassportTabs = ({ imprints, badges, challenges, testimonials }: Pas
 
       <TabsContent value="map" className="space-y-6">
         <MemoryMapView />
+      </TabsContent>
+
+      <TabsContent value="referrals" className="space-y-6">
+        <ReferralStatus />
       </TabsContent>
 
       <TabsContent value="vault" className="space-y-6">
