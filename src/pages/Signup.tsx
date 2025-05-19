@@ -7,6 +7,19 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { toast } from "@/components/ui/sonner";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+// Define a user profile type for better structure
+interface UserProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  referralCode: string;
+  referrer: string;
+  signupDate: string;
+  profileVisibility: "public" | "private" | "family";
+  userReferralCode: string;
+}
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +27,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [referralCode, setReferralCode] = useState("");
+  const [profileVisibility, setProfileVisibility] = useState<"public" | "private" | "family">("private");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -26,16 +40,39 @@ const Signup = () => {
       setIsLoading(false);
 
       if (firstName && lastName && email && password) {
+        // Generate unique referral code for this user
+        const userReferralCode = `${firstName.toLowerCase()}-${Math.random().toString(36).substring(2, 8)}`;
+        
+        // Create a structured user profile object
+        const userProfile: UserProfile = {
+          firstName,
+          lastName,
+          email,
+          referralCode: userReferralCode,
+          referrer: referralCode,
+          signupDate: new Date().toISOString(),
+          profileVisibility,
+          userReferralCode
+        };
+
+        // Store user authentication state
         localStorage.setItem("isAuthenticated", "true");
+        
+        // Store structured user profile as JSON
+        localStorage.setItem("userProfile", JSON.stringify(userProfile));
+        
+        // Store individual fields for backward compatibility
         localStorage.setItem("userFirstName", firstName);
         localStorage.setItem("userLastName", lastName);
         localStorage.setItem("userEmail", email);
         localStorage.setItem("userReferrer", referralCode);
         localStorage.setItem("userSignupDate", new Date().toISOString());
-        
-        // Generate unique referral code for this user
-        const userReferralCode = `${firstName.toLowerCase()}-${Math.random().toString(36).substring(2, 8)}`;
         localStorage.setItem("userReferralCode", userReferralCode);
+        localStorage.setItem("userProfileVisibility", profileVisibility);
+        
+        // Export user data to console for demonstration (in real app, this would be an API call)
+        console.log("User registered:", userProfile);
+        exportUserForCRM(userProfile);
         
         toast.success("Welcome to Imprintr! Your account has been created.");
         navigate("/passport");
@@ -43,6 +80,19 @@ const Signup = () => {
         toast.error("Please fill out all fields.");
       }
     }, 1000);
+  };
+
+  // Function to demonstrate CRM export capability (would be a server-side API call in production)
+  const exportUserForCRM = (user: UserProfile) => {
+    // This is a placeholder - in a real application, this would be an API call to your backend
+    console.log("CRM export data:", {
+      fullName: `${user.firstName} ${user.lastName}`,
+      email: user.email,
+      signupDate: user.signupDate,
+      profileType: user.profileVisibility,
+      referralSource: user.referrer || "direct",
+      // Add any other fields needed for CRM
+    });
   };
 
   return (
@@ -99,6 +149,35 @@ const Signup = () => {
                     required
                   />
                 </div>
+                
+                <div className="space-y-3">
+                  <Label>Profile Visibility</Label>
+                  <RadioGroup
+                    value={profileVisibility}
+                    onValueChange={(value) => setProfileVisibility(value as "public" | "private" | "family")}
+                    className="flex flex-col space-y-2"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="private" id="private-profile" />
+                      <Label htmlFor="private-profile" className="font-normal cursor-pointer">
+                        🔒 Private (Only you can see)
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="family" id="family-profile" />
+                      <Label htmlFor="family-profile" className="font-normal cursor-pointer">
+                        👪 Family Only
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="public" id="public-profile" />
+                      <Label htmlFor="public-profile" className="font-normal cursor-pointer">
+                        🌎 Public (Anyone can see)
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+                
                 <div className="space-y-2">
                   <Label htmlFor="referralCode">Were you invited by someone? (Optional)</Label>
                   <Input

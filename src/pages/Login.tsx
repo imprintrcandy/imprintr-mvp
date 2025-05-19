@@ -8,6 +8,17 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { MainLayout } from "@/components/layout/MainLayout";
 import { toast } from "@/components/ui/sonner";
 
+interface UserProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  referralCode: string;
+  referrer: string;
+  signupDate: string;
+  profileVisibility: "public" | "private" | "family";
+  userReferralCode: string;
+}
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +35,15 @@ const Login = () => {
 
       if (email && password) {
         localStorage.setItem("isAuthenticated", "true");
+        
+        // In a real application, we would fetch the user profile from a backend API
+        // For demo purposes, we'll just log this login attempt
+        console.log("Login attempt:", {
+          email,
+          timestamp: new Date().toISOString(),
+          // This would be tracked for security logging
+        });
+        
         toast.success("Welcome back to Imprintr!");
         navigate("/passport");
       } else {
