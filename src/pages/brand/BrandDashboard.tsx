@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { Award, Users, MapPin, QrCode, Calendar } from "lucide-react";
+import { Award, Users, MapPin, QrCode, Calendar, ShieldCheck } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 

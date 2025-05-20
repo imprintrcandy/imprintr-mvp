@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import BrandLayout from "@/components/layout/BrandLayout";
 import { useAuth } from "@/contexts/AuthContext";
@@ -137,28 +136,38 @@ const BrandProfile = () => {
       setLoading(true);
       
       // First, update or create the brand profile
-      let brandId;
+      let brandIdToUpdate = brandId;
       
-      if (!brandId) {
-        // Create new brand record
+      if (!brandIdToUpdate) {
+        // Create new brand record - ensure name is provided
         const { data: newBrand, error: createError } = await supabase
           .from('brands')
           .insert({
-            ...data,
+            name: data.name,  // Explicitly include name
+            description: data.description,
+            location: data.location,
+            category: data.category,
+            logo_url: data.logo_url,
             owner_id: user.id,
           })
           .select('id')
           .single();
           
         if (createError) throw createError;
-        brandId = newBrand.id;
-        setBrandId(brandId);
+        brandIdToUpdate = newBrand.id;
+        setBrandId(brandIdToUpdate);
       } else {
         // Update existing brand
         const { error: updateError } = await supabase
           .from('brands')
-          .update(data)
-          .eq('id', brandId);
+          .update({
+            name: data.name,  // Explicitly include name
+            description: data.description,
+            location: data.location,
+            category: data.category,
+            logo_url: data.logo_url,
+          })
+          .eq('id', brandIdToUpdate);
           
         if (updateError) throw updateError;
       }
