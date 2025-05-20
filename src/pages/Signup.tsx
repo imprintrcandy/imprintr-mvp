@@ -3,96 +3,67 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { MainLayout } from "@/components/layout/MainLayout";
-import { toast } from "@/components/ui/sonner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useAuth } from "@/contexts/AuthContext";
 
-// Define a user profile type for better structure
-interface UserProfile {
-  firstName: string;
-  lastName: string;
-  email: string;
-  referralCode: string;
-  referrer: string;
-  signupDate: string;
-  profileVisibility: "public" | "private" | "family";
-  userReferralCode: string;
-}
+const signupSchema = z.object({
+  firstName: z.string().min(2, "First name is required"),
+  lastName: z.string().min(2, "Last name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  referralCode: z.string().optional(),
+  profileVisibility: z.enum(["public", "private", "family"], {
+    required_error: "Please select a profile visibility option",
+  }),
+});
+
+type SignupFormValues = z.infer<typeof signupSchema>;
 
 const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [referralCode, setReferralCode] = useState("");
-  const [profileVisibility, setProfileVisibility] = useState<"public" | "private" | "family">("private");
   const [isLoading, setIsLoading] = useState(false);
+  const { signUp } = useAuth();
   const navigate = useNavigate();
+  
+  const form = useForm<SignupFormValues>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      referralCode: "",
+      profileVisibility: "private",
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: SignupFormValues) => {
     setIsLoading(true);
-
-    // Simulate registration process
-    setTimeout(() => {
+    
+    try {
+      // Create user profile metadata
+      const userProfile = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        referrer: data.referralCode,
+        profileVisibility: data.profileVisibility,
+        signupDate: new Date().toISOString(),
+        userReferralCode: `${data.firstName.toLowerCase()}-${Math.random().toString(36).substring(2, 8)}`,
+      };
+      
+      await signUp(data.email, data.password, userProfile);
+      navigate("/passport");
+    } catch (error) {
+      console.error("Signup error:", error);
+    } finally {
       setIsLoading(false);
-
-      if (firstName && lastName && email && password) {
-        // Generate unique referral code for this user
-        const userReferralCode = `${firstName.toLowerCase()}-${Math.random().toString(36).substring(2, 8)}`;
-        
-        // Create a structured user profile object
-        const userProfile: UserProfile = {
-          firstName,
-          lastName,
-          email,
-          referralCode: userReferralCode,
-          referrer: referralCode,
-          signupDate: new Date().toISOString(),
-          profileVisibility,
-          userReferralCode
-        };
-
-        // Store user authentication state
-        localStorage.setItem("isAuthenticated", "true");
-        
-        // Store structured user profile as JSON
-        localStorage.setItem("userProfile", JSON.stringify(userProfile));
-        
-        // Store individual fields for backward compatibility
-        localStorage.setItem("userFirstName", firstName);
-        localStorage.setItem("userLastName", lastName);
-        localStorage.setItem("userEmail", email);
-        localStorage.setItem("userReferrer", referralCode);
-        localStorage.setItem("userSignupDate", new Date().toISOString());
-        localStorage.setItem("userReferralCode", userReferralCode);
-        localStorage.setItem("userProfileVisibility", profileVisibility);
-        
-        // Export user data to console for demonstration (in real app, this would be an API call)
-        console.log("User registered:", userProfile);
-        exportUserForCRM(userProfile);
-        
-        toast.success("Welcome to Imprintr! Your account has been created.");
-        navigate("/passport");
-      } else {
-        toast.error("Please fill out all fields.");
-      }
-    }, 1000);
-  };
-
-  // Function to demonstrate CRM export capability (would be a server-side API call in production)
-  const exportUserForCRM = (user: UserProfile) => {
-    // This is a placeholder - in a real application, this would be an API call to your backend
-    console.log("CRM export data:", {
-      fullName: `${user.firstName} ${user.lastName}`,
-      email: user.email,
-      signupDate: user.signupDate,
-      profileType: user.profileVisibility,
-      referralSource: user.referrer || "direct",
-      // Add any other fields needed for CRM
-    });
+    }
   };
 
   return (
@@ -107,90 +78,131 @@ const Signup = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input
-                      id="firstName"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="firstName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>First Name</FormLabel>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="lastName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Last Name</FormLabel>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      id="lastName"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="name@example.com"
-                    required
+                  
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="name@example.com"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                  
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input type="password" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                
-                <div className="space-y-3">
-                  <Label>Profile Visibility</Label>
-                  <RadioGroup
-                    value={profileVisibility}
-                    onValueChange={(value) => setProfileVisibility(value as "public" | "private" | "family")}
-                    className="flex flex-col space-y-2"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <RadioGroupItem value="private" id="private-profile" />
-                      <Label htmlFor="private-profile" className="font-normal cursor-pointer">
-                        🔒 Private (Only you can see)
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <RadioGroupItem value="family" id="family-profile" />
-                      <Label htmlFor="family-profile" className="font-normal cursor-pointer">
-                        👪 Family Only
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <RadioGroupItem value="public" id="public-profile" />
-                      <Label htmlFor="public-profile" className="font-normal cursor-pointer">
-                        🌎 Public (Anyone can see)
-                      </Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="referralCode">Were you invited by someone? (Optional)</Label>
-                  <Input
-                    id="referralCode"
-                    value={referralCode}
-                    onChange={(e) => setReferralCode(e.target.value)}
-                    placeholder="Enter referral code"
+                  
+                  <FormField
+                    control={form.control}
+                    name="profileVisibility"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel>Profile Visibility</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex flex-col space-y-2"
+                          >
+                            <div className="flex items-center space-x-3">
+                              <RadioGroupItem value="private" id="private-profile" />
+                              <Label htmlFor="private-profile" className="font-normal cursor-pointer">
+                                🔒 Private (Only you can see)
+                              </Label>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                              <RadioGroupItem value="family" id="family-profile" />
+                              <Label htmlFor="family-profile" className="font-normal cursor-pointer">
+                                👪 Family Only
+                              </Label>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                              <RadioGroupItem value="public" id="public-profile" />
+                              <Label htmlFor="public-profile" className="font-normal cursor-pointer">
+                                🌎 Public (Anyone can see)
+                              </Label>
+                            </div>
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Creating account..." : "Create account"}
-                </Button>
-              </form>
+                  
+                  <FormField
+                    control={form.control}
+                    name="referralCode"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Were you invited by someone? (Optional)</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Enter referral code"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          Enter a referral code if you were invited by another user
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? "Creating account..." : "Create account"}
+                  </Button>
+                </form>
+              </Form>
               
               <div className="mt-4">
                 <div className="relative">
@@ -238,6 +250,15 @@ const Signup = () => {
                   className="text-primary hover:text-primary/80 font-medium"
                 >
                   Log in
+                </Link>
+              </p>
+              <p className="text-center text-sm text-muted-foreground mt-2">
+                Are you a business?{" "}
+                <Link
+                  to="/brand/signup"
+                  className="text-primary hover:text-primary/80 font-medium"
+                >
+                  Register as brand
                 </Link>
               </p>
               <p className="text-center text-xs text-muted-foreground mt-2">

@@ -14,6 +14,14 @@ import About from "./pages/About";
 import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
 import Challenges from "./pages/Challenges";
+import BrandSignup from "./pages/brand/BrandSignup";
+import BrandLogin from "./pages/brand/BrandLogin";
+import BrandDashboard from "./pages/brand/BrandDashboard";
+import BrandChallenges from "./pages/brand/BrandChallenges";
+import BrandVisitors from "./pages/brand/BrandVisitors";
+import BrandVerification from "./pages/brand/BrandVerification";
+import BrandProfile from "./pages/brand/BrandProfile";
+import { AuthProvider } from "./contexts/AuthContext";
 
 // Create a new QueryClient instance outside of component rendering
 const queryClient = new QueryClient();
@@ -22,21 +30,33 @@ const App = () => (
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/passport" element={<Passport />} />
-            <Route path="/new-imprint" element={<NewImprint />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/features" element={<Features />} />
-            <Route path="/challenges" element={<Challenges />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AuthProvider>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/passport" element={<Passport />} />
+              <Route path="/new-imprint" element={<NewImprint />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/features" element={<Features />} />
+              <Route path="/challenges" element={<Challenges />} />
+              
+              {/* Brand Routes */}
+              <Route path="/brand/signup" element={<BrandSignup />} />
+              <Route path="/brand/login" element={<BrandLogin />} />
+              <Route path="/brand/dashboard" element={<BrandDashboard />} />
+              <Route path="/brand/challenges" element={<BrandChallenges />} />
+              <Route path="/brand/visitors" element={<BrandVisitors />} />
+              <Route path="/brand/verification" element={<BrandVerification />} />
+              <Route path="/brand/profile" element={<BrandProfile />} />
+              
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
