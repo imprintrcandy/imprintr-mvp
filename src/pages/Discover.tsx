@@ -29,7 +29,7 @@ interface DiscoverImprint {
 const Discover = () => {
   const [activeFilter, setActiveFilter] = useState<"all" | "personal" | "brand" | "audio">("all");
 
-  // Convert sample imprints to discover format
+  // Convert sample imprints to discover format with explicit type casting
   const trendingImprints: DiscoverImprint[] = SAMPLE_IMPRINTS.map((imprint, index) => ({
     id: imprint.id,
     title: imprint.title,
@@ -37,7 +37,7 @@ const Discover = () => {
     imageUrl: imprint.imageUrl,
     date: imprint.date,
     impressions: Math.floor(Math.random() * 120) + 5, // Random number for demo
-    type: index % 3 === 0 ? "brand" : index % 5 === 0 ? "audio" : "personal",
+    type: (index % 3 === 0 ? "brand" : index % 5 === 0 ? "audio" : "personal") as "brand" | "audio" | "personal",
     author: imprint.relationships?.[0]?.split(" of ")[1] || "Anonymous User",
   })).sort((a, b) => b.impressions - a.impressions); // Sort by impressions
 
