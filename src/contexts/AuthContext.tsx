@@ -57,7 +57,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         email,
         password,
         options: {
-          data: metadata,
+          data: {
+            ...metadata,
+            profileVisibility: "public", // Default all profiles to public
+          }
         }
       });
 

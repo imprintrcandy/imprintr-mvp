@@ -8,6 +8,7 @@ import { StrictMode } from "react";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Auth from "./pages/Auth"; // Import the new Auth page
 import Passport from "./pages/Passport";
 import NewImprint from "./pages/NewMemory";
 import About from "./pages/About";
@@ -15,7 +16,7 @@ import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
 import Challenges from "./pages/Challenges";
 import WhyPartnerWithUs from "./pages/WhyPartnerWithUs";
-import Discover from "./pages/Discover"; // Import the new Discover page
+import Discover from "./pages/Discover";
 import BrandSignup from "./pages/brand/BrandSignup";
 import BrandLogin from "./pages/brand/BrandLogin";
 import BrandDashboard from "./pages/brand/BrandDashboard";
@@ -38,9 +39,10 @@ const App = () => (
             <Sonner />
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/discover" element={<Discover />} /> {/* Add the Discover route */}
+              <Route path="/discover" element={<Discover />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/auth" element={<Auth />} /> {/* Add the Auth route */}
               <Route path="/passport" element={<Passport />} />
               <Route path="/new-imprint" element={<NewImprint />} />
               <Route path="/about" element={<About />} />
