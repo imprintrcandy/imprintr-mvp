@@ -15,6 +15,7 @@ import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
 import Challenges from "./pages/Challenges";
 import WhyPartnerWithUs from "./pages/WhyPartnerWithUs";
+import Discover from "./pages/Discover"; // Import the new Discover page
 import BrandSignup from "./pages/brand/BrandSignup";
 import BrandLogin from "./pages/brand/BrandLogin";
 import BrandDashboard from "./pages/brand/BrandDashboard";
@@ -37,6 +38,7 @@ const App = () => (
             <Sonner />
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/discover" element={<Discover />} /> {/* Add the Discover route */}
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/passport" element={<Passport />} />
