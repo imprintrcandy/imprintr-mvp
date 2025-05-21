@@ -40,6 +40,11 @@ export const Footer = () => {
                   Testimonials
                 </Link>
               </li>
+              <li>
+                <Link to="/why-partner-with-us" className="text-sm text-muted-foreground hover:text-foreground">
+                  Why Partner With Us
+                </Link>
+              </li>
             </ul>
           </div>
           

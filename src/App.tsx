@@ -14,6 +14,7 @@ import About from "./pages/About";
 import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
 import Challenges from "./pages/Challenges";
+import WhyPartnerWithUs from "./pages/WhyPartnerWithUs";
 import BrandSignup from "./pages/brand/BrandSignup";
 import BrandLogin from "./pages/brand/BrandLogin";
 import BrandDashboard from "./pages/brand/BrandDashboard";
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/features" element={<Features />} />
               <Route path="/challenges" element={<Challenges />} />
+              <Route path="/why-partner-with-us" element={<WhyPartnerWithUs />} />
               
               {/* Brand Routes */}
               <Route path="/brand/signup" element={<BrandSignup />} />
