@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layout/MainLayout";
@@ -180,6 +179,49 @@ const Index = () => {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partner Brands Featured Section - NEW SECTION */}
+      <section className="py-20 bg-gradient-to-r from-memory-50 to-warmth-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-3">
+            <span className="text-gradient">Partner Brands</span> Creating Memories
+          </h2>
+          <p className="text-xl text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            Join leading brands creating meaningful memory experiences that customers never forget
+          </p>
+          
+          <div className="flex justify-center items-center mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+              {/* Placeholder brand logos - would be replaced with actual partner logos */}
+              <div className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                <div className="text-2xl text-muted-foreground font-medium">Brand 1</div>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                <div className="text-2xl text-muted-foreground font-medium">Brand 2</div>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                <div className="text-2xl text-muted-foreground font-medium">Brand 3</div>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                <div className="text-2xl text-muted-foreground font-medium">Brand 4</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Button 
+              onClick={() => navigate("/why-partner-with-us")}
+              className="text-lg px-8 py-6"
+              size="lg"
+            >
+              Partner Your Brand With Us
+            </Button>
+            <p className="mt-4 text-muted-foreground">
+              Create memory experiences that customers will cherish forever
+            </p>
           </div>
         </div>
       </section>
