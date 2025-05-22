@@ -3,15 +3,17 @@ import { useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Login from "./Login";
-import Signup from "./Signup";
+import Login from "@/components/auth/LoginForm";
+import SignupForm from "@/components/auth/SignupForm";
 import BrandLogin from "./brand/BrandLogin";
 import BrandSignup from "./brand/BrandSignup";
+import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState<"visitor" | "brand">("visitor");
   const [visitorMode, setVisitorMode] = useState<"login" | "signup">("login");
   const [brandMode, setBrandMode] = useState<"login" | "signup">("login");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <MainLayout>
@@ -56,9 +58,15 @@ const Auth = () => {
                 
                 <CardContent className="p-0">
                   {visitorMode === "login" ? (
-                    <Login embedded={true} />
+                    <>
+                      <Login embedded={true} />
+                      <SocialLoginButtons isLoading={isLoading} />
+                    </>
                   ) : (
-                    <Signup embedded={true} />
+                    <>
+                      <SignupForm embedded={true} />
+                      <SocialLoginButtons isLoading={isLoading} />
+                    </>
                   )}
                 </CardContent>
               </TabsContent>

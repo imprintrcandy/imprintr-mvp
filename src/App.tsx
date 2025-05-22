@@ -8,7 +8,7 @@ import { StrictMode } from "react";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Auth from "./pages/Auth"; // Import the new Auth page
+import Auth from "./pages/Auth"; // Import the updated Auth page
 import Passport from "./pages/Passport";
 import NewImprint from "./pages/NewMemory";
 import About from "./pages/About";
