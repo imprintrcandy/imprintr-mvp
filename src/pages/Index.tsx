@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layout/MainLayout";
@@ -24,7 +25,7 @@ const Index = () => {
 
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center z-10">
           <img 
-            src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+            src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
             alt="Imprintr Logo" 
             className="h-32 w-auto mb-6 animate-fade-in"
           />
@@ -269,7 +270,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-20 mix-blend-soft-light"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <img 
-            src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+            src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
             alt="Imprintr Logo" 
             className="h-16 w-auto mb-6 mx-auto"
           />

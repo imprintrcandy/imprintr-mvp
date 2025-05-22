@@ -53,7 +53,7 @@ export const NavBar = () => {
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
             <img 
-              src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+              src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
               alt="Imprintr Logo" 
               className="h-8 w-auto"
             />
@@ -157,7 +157,7 @@ export const NavBar = () => {
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <div className="flex items-center mb-8">
               <img 
-                src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+                src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
                 alt="Imprintr Logo" 
                 className="h-8 w-auto mr-2"
               />
