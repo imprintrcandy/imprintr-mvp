@@ -45,6 +45,11 @@
     --sidebar-accent-foreground: 262 80% 25%;
     --sidebar-border: 262 50% 90%;
     --sidebar-ring: 262 99% 60%;
+    
+    /* Added brand colors based on the logo */
+    --brand-blue: 210 100% 65%;
+    --brand-red: 350 100% 65%;
+    --brand-dark: 240 25% 15%;
   }
 
   .dark {
@@ -84,6 +89,11 @@
     --sidebar-accent-foreground: 262 30% 90%;
     --sidebar-border: 262 40% 25%;
     --sidebar-ring: 262 80% 60%;
+    
+    /* Added brand colors based on the logo */
+    --brand-blue: 210 80% 55%;
+    --brand-red: 350 80% 55%;
+    --brand-dark: 240 25% 10%;
   }
 }
 
@@ -119,6 +129,11 @@
   .text-gradient {
     @apply bg-gradient-to-r from-imprint-600 to-memory-500 bg-clip-text text-transparent;
   }
+  
+  /* New brand logo gradient for text */
+  .brand-gradient-text {
+    @apply bg-gradient-to-r from-[#5eacee] to-[#ff6b81] bg-clip-text text-transparent;
+  }
 
   .bg-gradient-light {
     @apply bg-gradient-to-r from-imprint-100/80 via-warmth-50/50 to-memory-100/80;
@@ -126,6 +141,11 @@
 
   .bg-gradient-memory {
     @apply bg-gradient-to-br from-imprint-400/90 via-imprint-500/80 to-memory-500/90;
+  }
+  
+  /* New brand gradient background */
+  .bg-gradient-brand {
+    @apply bg-gradient-to-r from-[#5eacee] to-[#ff6b81];
   }
 
   .scroll-hidden::-webkit-scrollbar {
@@ -139,5 +159,15 @@
 
   .photo-grid {
     @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4;
+  }
+  
+  /* Brand overlay with Philippines map */
+  .bg-brand-overlay {
+    @apply bg-[#1a1a2e] relative;
+  }
+  
+  .bg-brand-overlay::before {
+    content: '';
+    @apply absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-20 mix-blend-soft-light;
   }
 }

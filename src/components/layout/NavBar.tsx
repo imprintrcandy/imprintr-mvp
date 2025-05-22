@@ -52,6 +52,11 @@ export const NavBar = () => {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
+            <img 
+              src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+              alt="Imprintr Logo" 
+              className="h-8 w-auto"
+            />
             <span className="text-2xl font-bold text-primary">Imprintr</span>
           </Link>
         </div>
@@ -150,7 +155,15 @@ export const NavBar = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-            <nav className="flex flex-col gap-4 mt-8">
+            <div className="flex items-center mb-8">
+              <img 
+                src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+                alt="Imprintr Logo" 
+                className="h-8 w-auto mr-2"
+              />
+              <span className="text-xl font-bold text-primary">Imprintr</span>
+            </div>
+            <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}

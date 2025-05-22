@@ -16,20 +16,25 @@ const Index = () => {
 
   return (
     <MainLayout hideNav>
-      {/* Hero Section */}
+      {/* Hero Section with new branding */}
       <section className="relative h-screen">
-        <div className="absolute inset-0 bg-gradient-memory"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3')] bg-cover bg-center mix-blend-overlay opacity-30"></div>
+        <div className="absolute inset-0 bg-[#1a1a2e]"></div>
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-30 mix-blend-soft-light"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/70"></div>
 
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center z-10">
+          <img 
+            src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+            alt="Imprintr Logo" 
+            className="h-32 w-auto mb-6 animate-fade-in"
+          />
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 animate-fade-in">
-            Your life's journey, <span className="text-gradient">beautifully imprinted</span>
+            <span className="text-gradient">Imprintr</span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mb-10 animate-fade-in">
-            Turn your moments into living imprints — celebrated, shared, and brought to life through badges, challenges, and meaningful connections
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mb-10 animate-fade-in font-medium">
+            Where Imprints Live Forever
           </p>
-          <div className="flex flex-col md:flex-row gap-4 animate-fade-in">
+          <div className="flex flex-col md:flex-row gap-4 animate-fade-in mt-8">
             <Button
               onClick={handleGetStarted}
               className="text-lg px-8 py-6"
@@ -144,10 +149,10 @@ const Index = () => {
                   strokeLinejoin="round"
                   className="text-warmth-600"
                 >
-                  <path d="M3 8c0-3.5 2.5-6 6.5-6 4 0 4.5 3 4.5 5 0 2 0 3 4 8H7c-4 0-4-5-4-7Z" />
+                  <path d="M3 8c0-3.5 2.58-1.29 4-1 3 .62 4 1.5 4 6 0 .5 0 4-4 5H7c-4 0-4-5-4-7Z" />
                   <path d="M13 6.5c1-1 2.58-1.29 4-1 3 .62 4 1.5 4 6 0 .5 0 4-4 5H7" />
                   <path d="M13 18v3" />
-                  <path d="M17.8 18c.2 0 .5-.2.7-.4.2-.2.3-.4.3-.7.1-.3 0-.5-.1-.7-.2-.2-.4-.4-.7-.5-.3-.1-.6 0-.8.1-.3.1-.5.3-.6.6-.1.2-.1.5 0 .8.1.3.3.5.5.6.2.1.4.2.7.2Z" />
+                  <path d="M17.8 18c.2 0 .5-.2.7-.4.2-.2.3-.4.3-.7.1-.3 0-.5-.1-.7-.2-.2-.4-.4-.7-.5-.3-.1-.6 0-.8.1-.3.3.5.5.6.2.1.4.2.7.2Z" />
                 </svg>
               </div>
               <h3 className="text-xl font-display font-semibold mb-2">Move Hearts</h3>
@@ -183,7 +188,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Partner Brands Featured Section - NEW SECTION */}
+      {/* Partner Brands Featured Section */}
       <section className="py-20 bg-gradient-to-r from-memory-50 to-warmth-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-3">
@@ -260,13 +265,19 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-memory py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
-            Start Your Imprint Journey Today
+      <section className="bg-[#1a1a2e] py-16 relative">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-20 mix-blend-soft-light"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <img 
+            src="/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png" 
+            alt="Imprintr Logo" 
+            className="h-16 w-auto mb-6 mx-auto"
+          />
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
+            Imprintr
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
-            Invite friends and family to co-create a tapestry of memories, milestones, and meaningful connections
+          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8 font-medium">
+            Where Imprints Live Forever
           </p>
           <div className="flex flex-col md:flex-row justify-center gap-4">
             <Button
