@@ -1,73 +1,42 @@
-# Welcome to your Lovable project
+# Imprintr – Web3 Memory-Tech Platform
 
-## Project info
+**Where Imprints Live Forever.**
 
-**URL**: https://lovable.dev/projects/6c509c34-43c9-4026-a5c2-1e138c717600
+Imprintr is a gamified memory-tech platform designed to help users capture, preserve, and immortalize their most meaningful experiences through digital memory passports and collectible NFT badges.
 
-## How can I edit this code?
+## 🌍 Built On
+- Base Mainnet
+- Lovable (No-code app builder)
+- Highlight.xyz (NFT minting)
+- ENS Basename: imprintr.base.eth
 
-There are several ways of editing your application.
+## 🎯 Core Features
+- Location-based Memory Badge NFTs
+- Emotional imprint storytelling
+- Public digital memory profiles
+- Genesis NFT Drop (Imprintr Genesis Badge)
 
-**Use Lovable**
+## 🧱 Built During Base Batch APAC 2025
+During the Buildathon, we:
+- Created our first onchain NFT drop (Genesis Badge)
+- Deployed to Base Mainnet
+- Integrated our Basename (`imprintr.base.eth`)
+- Began community onboarding flow via Highlight
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6c509c34-43c9-4026-a5c2-1e138c717600) and start prompting.
+## 🛠️ Tech Stack
+- No-code MVP via [Lovable](https://imprintr.lovable.app)
+- NFT deployed on [Highlight.xyz](https://highlight.xyz)
+- Wallet-based login (Base Mainnet)
+- GitHub for documentation and Buildathon transparency
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📽️ Demo Video
+👉 [Coming soon – uploading to YouTube/Loom]
 
-**Use your preferred IDE**
+## 📬 Contact
+Candy Sagun (Founder)  
+📧 leadgendarycandy@gmail.com  
+🔗 [imprintr.base.eth](https://base.org/name/imprintr.base.eth)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/6c509c34-43c9-4026-a5c2-1e138c717600) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+> **“We believe some moments deserve to live forever. That’s why we built Imprintr.”**
