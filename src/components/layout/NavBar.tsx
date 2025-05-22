@@ -1,12 +1,23 @@
+
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import { LogOut } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -14,17 +25,22 @@ export const NavBar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Discover", path: "/discover" }, // Added Discover link
+    { name: "Discover", path: "/discover" },
     { name: "Features", path: "/features" },
     { name: "About", path: "/about" },
     { name: "Challenges", path: "/challenges" },
-    { name: "Partner Brand", path: "/why-partner-with-us" }, // Added Partner Brand link
+    { name: "Partner Brand", path: "/why-partner-with-us" },
   ];
 
   const authLinks = [
     { name: "Login", path: "/login" },
     { name: "Sign Up", path: "/signup", primary: true },
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -59,10 +75,28 @@ export const NavBar = () => {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          {localStorage.getItem("userFirstName") ? (
-            <Link to="/passport">
-              <Button variant="default">My Passport</Button>
-            </Link>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <Link to="/passport">
+                <Button variant="default">My Passport</Button>
+              </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <span className="sr-only">Open user menu</span>
+                    <div className="h-6 w-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+                      {user.email?.charAt(0).toUpperCase() || "U"}
+                    </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Sign out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           ) : (
             authLinks.map((link) => (
               <Link key={link.path} to={link.path}>
@@ -114,12 +148,25 @@ export const NavBar = () => {
                 </Link>
               ))}
               <div className="h-px bg-border my-4" />
-              {localStorage.getItem("userFirstName") ? (
-                <Link to="/passport" onClick={closeMenu}>
-                  <Button className="w-full" variant="default">
-                    My Passport
+              {user ? (
+                <>
+                  <Link to="/passport" onClick={closeMenu}>
+                    <Button className="w-full mb-2" variant="default">
+                      My Passport
+                    </Button>
+                  </Link>
+                  <Button 
+                    className="w-full flex items-center justify-center gap-2" 
+                    variant="outline"
+                    onClick={() => {
+                      handleSignOut();
+                      closeMenu();
+                    }}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Sign out</span>
                   </Button>
-                </Link>
+                </>
               ) : (
                 authLinks.map((link) => (
                   <Link key={link.path} to={link.path} onClick={closeMenu}>
