@@ -63,40 +63,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// New muted pastel color palette for Gen Z appeal
-				coral: {
-					DEFAULT: 'hsl(var(--coral))',
-					foreground: 'hsl(var(--coral-foreground))'
-				},
-				mint: {
-					DEFAULT: 'hsl(var(--mint))',
-					foreground: 'hsl(var(--mint-foreground))'
-				},
-				lavender: {
-					DEFAULT: 'hsl(var(--lavender))',
-					foreground: 'hsl(var(--lavender-foreground))'
-				},
-				peach: {
-					DEFAULT: 'hsl(var(--peach))',
-					foreground: 'hsl(var(--peach-foreground))'
-				},
-				sky: {
-					DEFAULT: 'hsl(var(--sky))',
-					foreground: 'hsl(var(--sky-foreground))'
-				},
-				// Legacy brand colors for backwards compatibility
-				blush: {
-					DEFAULT: 'hsl(var(--blush))',
-					foreground: 'hsl(var(--blush-foreground))'
-				},
-				sunset: {
-					DEFAULT: 'hsl(var(--sunset))',
-					foreground: 'hsl(var(--sunset-foreground))'
-				},
-				cream: {
-					DEFAULT: 'hsl(var(--cream))',
-					foreground: 'hsl(var(--cream-foreground))'
-				},
 				imprint: {
 					50: '#f5f3ff',
 					100: '#ede8ff',
@@ -141,17 +107,12 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Inter', 'Poppins', 'Nunito Sans', 'sans-serif'],
-				display: ['Poppins', 'Inter', 'sans-serif'],
-				body: ['Inter', 'Poppins', 'sans-serif'],
+				sans: ['Inter', 'sans-serif'],
+				serif: ['Lora', 'serif'],
+				display: ['Playfair Display', 'serif'],
 			},
 			boxShadow: {
-				'soft': 'var(--shadow-soft)',
-				'card': 'var(--shadow-card)',
-				'floating': 'var(--shadow-floating)',
-				'coral': 'var(--shadow-coral)',
-				'mint': 'var(--shadow-mint)',
-				'lavender': 'var(--shadow-lavender)',
+				'soft': '0 4px 20px rgba(0, 0, 0, 0.08)',
 				'memory': '0 4px 15px rgba(234, 76, 98, 0.15)',
 				'warm': '0 4px 15px rgba(255, 145, 29, 0.15)',
 			},
