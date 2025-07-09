@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,67 +7,86 @@
 
 @layer base {
   :root {
-    --background: 30 30% 99%;
-    --foreground: 220 10% 20%;
+    /* Pure white background for clean, modern feel */
+    --background: 0 0% 100%;
+    --foreground: 220 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 10% 20%;
+    --card-foreground: 220 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 10% 20%;
+    --popover-foreground: 220 15% 15%;
 
-    --primary: 262 99% 60%;
-    --primary-foreground: 210 40% 98%;
+    /* Electric blue for badges and primary actions */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 350 85% 60%;
-    --secondary-foreground: 210 40% 98%;
+    /* Gold for legacy and impact */
+    --secondary: 45 86% 62%;
+    --secondary-foreground: 220 15% 15%;
 
     --muted: 220 10% 96%;
-    --muted-foreground: 220 10% 50%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 30 95% 55%;
-    --accent-foreground: 220 10% 15%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 10% 90%;
-    --input: 220 10% 90%;
-    --ring: 262 99% 60%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
 
-    --radius: 1.5rem;
+    /* Increased border radius for friendly, rounded feel */
+    --radius: 1.25rem;
 
-    --sidebar-background: 262 99% 98%;
-    --sidebar-foreground: 262 50% 30%;
-    --sidebar-primary: 262 99% 60%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 15% 15%;
+    --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 262 50% 95%;
-    --sidebar-accent-foreground: 262 80% 25%;
-    --sidebar-border: 262 50% 90%;
-    --sidebar-ring: 262 99% 60%;
+    --sidebar-accent: 220 10% 96%;
+    --sidebar-accent-foreground: 220 15% 15%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
     
-    /* Enhanced brand colors - warm, vibrant palette */
-    --blush: 350 70% 85%;
-    --blush-foreground: 350 80% 25%;
-    --lavender: 270 50% 85%;
-    --lavender-foreground: 270 80% 25%;
-    --sunset: 25 90% 75%;
-    --sunset-foreground: 25 80% 25%;
-    --mint: 165 60% 80%;
-    --mint-foreground: 165 80% 25%;
-    --cream: 45 60% 95%;
-    --cream-foreground: 45 80% 25%;
+    /* New muted pastel color palette */
+    --coral: 11 78% 85%;
+    --coral-foreground: 11 78% 25%;
+    --mint: 156 73% 85%;
+    --mint-foreground: 156 73% 25%;
+    --lavender: 270 67% 85%;
+    --lavender-foreground: 270 67% 25%;
+    --peach: 25 100% 85%;
+    --peach-foreground: 25 100% 25%;
+    --sky: 197 100% 85%;
+    --sky-foreground: 197 100% 25%;
     
-    /* Gradient definitions */
-    --gradient-memory: linear-gradient(135deg, hsl(var(--blush)), hsl(var(--sunset)));
+    /* Legacy brand colors for backwards compatibility */
+    --blush: 11 78% 85%;
+    --blush-foreground: 11 78% 25%;
+    --sunset: 25 100% 75%;
+    --sunset-foreground: 25 100% 25%;
+    --cream: 45 60% 96%;
+    --cream-foreground: 45 60% 25%;
+    
+    /* Updated gradient definitions with new palette */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(45 86% 62%));
+    --gradient-coral: linear-gradient(135deg, hsl(var(--coral)), hsl(var(--peach)));
+    --gradient-mint: linear-gradient(135deg, hsl(var(--mint)), hsl(var(--sky)));
+    --gradient-lavender: linear-gradient(135deg, hsl(var(--lavender)), hsl(var(--coral)));
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(270 67% 75%) 50%, hsl(11 78% 75%) 100%);
+    --gradient-memory: linear-gradient(135deg, hsl(var(--coral)), hsl(var(--peach)));
     --gradient-badge: linear-gradient(135deg, hsl(var(--lavender)), hsl(var(--mint)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--sunset)) 100%);
+    --gradient-soft: linear-gradient(135deg, hsl(var(--cream)) 0%, hsl(var(--coral)/0.3) 50%, hsl(var(--lavender)/0.3) 100%);
     
-    /* Shadow definitions */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
-    --shadow-memory: 0 8px 30px rgba(234, 76, 98, 0.12);
-    --shadow-badge: 0 8px 30px rgba(149, 87, 255, 0.12);
-    --shadow-warm: 0 4px 15px rgba(255, 145, 29, 0.1);
+    /* Soft, friendly shadows */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.06);
+    --shadow-floating: 0 20px 60px rgba(0, 0, 0, 0.08);
+    --shadow-coral: 0 8px 32px rgba(255, 181, 159, 0.2);
+    --shadow-mint: 0 8px 32px rgba(159, 255, 223, 0.2);
+    --shadow-lavender: 0 8px 32px rgba(207, 159, 255, 0.2);
   }
 
   .dark {
@@ -125,7 +144,11 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    @apply font-display font-bold;
+  }
+
+  body {
+    @apply font-body;
   }
 
   .memory-card {
@@ -148,7 +171,28 @@
     @apply bg-gradient-to-r from-imprint-600 to-memory-500 bg-clip-text text-transparent;
   }
   
-  /* Enhanced gradient text for warm, vibrant feel */
+  /* New Gen Z friendly gradient text styles */
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-coral {
+    background: var(--gradient-coral);
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-mint {
+    background: var(--gradient-mint);
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-lavender {
+    background: var(--gradient-lavender);
+    @apply bg-clip-text text-transparent;
+  }
+  
+  /* Legacy gradient text for backwards compatibility */
   .text-gradient-warm {
     @apply bg-gradient-to-r from-sunset to-blush bg-clip-text text-transparent;
   }
@@ -163,9 +207,25 @@
     @apply bg-clip-text text-transparent;
   }
 
-  /* Enhanced background gradients */
+  /* New background gradients with pastel palette */
   .bg-gradient-hero {
     background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-coral {
+    background: var(--gradient-coral);
+  }
+  
+  .bg-gradient-mint {
+    background: var(--gradient-mint);
+  }
+  
+  .bg-gradient-lavender {
+    background: var(--gradient-lavender);
   }
   
   .bg-gradient-memory {
@@ -177,7 +237,24 @@
   }
   
   .bg-gradient-soft {
-    @apply bg-gradient-to-br from-cream via-blush/30 to-lavender/30;
+    background: var(--gradient-soft);
+  }
+
+  /* Card styles with new shadows */
+  .card-floating {
+    @apply bg-white rounded-3xl shadow-floating border-0;
+  }
+  
+  .card-coral {
+    @apply bg-white rounded-3xl shadow-coral border border-coral/20;
+  }
+  
+  .card-mint {
+    @apply bg-white rounded-3xl shadow-mint border border-mint/20;
+  }
+  
+  .card-lavender {
+    @apply bg-white rounded-3xl shadow-lavender border border-lavender/20;
   }
 
   .scroll-hidden::-webkit-scrollbar {

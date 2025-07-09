@@ -17,85 +17,124 @@ const Index = () => {
 
   return (
     <MainLayout hideNav>
-      {/* Hero Section - Apple meets Notion aesthetic */}
-      <section className="relative min-h-screen bg-gradient-hero">
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-20 mix-blend-soft-light"></div>
+      {/* Hero Section - Gen Z meets Apple meets Notion */}
+      <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-10 mix-blend-soft-light"></div>
         
         <div className="relative container mx-auto px-4 min-h-screen flex flex-col justify-center items-center text-center z-10">
-          <div className="animate-fade-in">
+          <div className="animate-fade-in mb-8">
             <img 
               src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
               alt="Imprintr Logo" 
-              className="h-24 md:h-32 w-auto mb-4"
+              className="h-20 md:h-28 w-auto mb-6 mx-auto"
             />
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-4">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white mb-4 tracking-tight">
               Imprintr
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 font-medium">
-              Where Imprints Live Forever
+            <p className="text-xl md:text-2xl text-white/90 mb-4 font-semibold">
+              Where Your Memories Earn Meaning —
+            </p>
+            <p className="text-xl md:text-2xl text-white/90 mb-12 font-semibold">
+              and Badges That Last Forever.
             </p>
           </div>
 
-          <div className="animate-fade-in max-w-4xl mb-12">
-            <h2 className="text-2xl md:text-3xl font-display font-semibold text-white mb-6">
-              Where Your Memories Earn Badges That Last Forever
-            </h2>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
-              Create life challenges • Earn Digital Memory NFT Badges • Build your Digital Memory Passport • Leave a legacy worth remembering
+          <div className="animate-fade-in max-w-5xl mb-12">
+            <p className="text-lg md:text-xl text-white/80 mb-12 leading-relaxed font-medium">
+              🎮 Create life challenges • 🏆 Earn Digital Memory NFT Badges • 📖 Build your Digital Memory Passport<br />
+              ✨ It's like Pokémon GO for purpose-driven bucket lists + Instagram for core memories
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in mb-16">
+          <div className="flex flex-col sm:flex-row gap-6 animate-fade-in mb-16">
             <Button
               onClick={handleGetStarted}
-              className="text-lg px-8 py-6 bg-white text-primary hover:bg-white/90 rounded-2xl font-semibold shadow-xl"
+              className="text-lg px-10 py-6 bg-white text-primary hover:bg-white/95 rounded-3xl font-bold shadow-floating hover:shadow-coral transition-all duration-300 transform hover:scale-105"
               size="lg"
             >
-              🌟 Start Your Memory Passport
+              🌟 Start Earning Memory Badges
             </Button>
             <Button
               onClick={() => navigate("/challenges")}
               variant="outline"
-              className="text-lg px-8 py-6 bg-white/10 text-white border-white/30 hover:bg-white/20 rounded-2xl backdrop-blur-sm"
+              className="text-lg px-10 py-6 bg-white/10 text-white border-white/30 hover:bg-white/20 rounded-3xl backdrop-blur-md font-bold shadow-lg hover:shadow-xl transition-all duration-300"
               size="lg"
             >
-              🎯 Join a Challenge
+              🎯 Explore Challenges
             </Button>
           </div>
 
-          {/* Digital Passport Preview */}
-          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 max-w-2xl animate-fade-in border border-white/20">
-            <h3 className="text-xl font-display font-semibold text-white mb-4">
+          {/* Digital Memory Passport Mock Preview */}
+          <div className="card-floating max-w-4xl w-full animate-fade-in bg-white/15 backdrop-blur-lg border border-white/20 p-8">
+            <h3 className="text-2xl font-display font-bold text-white mb-6">
               ✨ Your Digital Memory Passport Preview
             </h3>
-            <div className="grid grid-cols-4 gap-4 mb-4">
-              {featuredBadges.map((badge, index) => (
-                <div key={badge.id} className="relative">
-                  <div className="w-16 h-16 bg-gradient-badge rounded-full flex items-center justify-center text-2xl shadow-lg">
-                    {['🏔️', '📸', '✈️'][index]}
+            
+            {/* Mock passport with badges */}
+            <div className="bg-white/20 backdrop-blur-sm rounded-3xl p-6 mb-6">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl border-4 border-white/30">
+                    👤
                   </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-sunset rounded-full border-2 border-white text-xs flex items-center justify-center text-white font-bold">
-                    ✓
+                  <div className="text-left">
+                    <h4 className="text-xl font-bold text-white">Your Name</h4>
+                    <p className="text-white/70">Digital Memory Keeper</p>
                   </div>
                 </div>
-              ))}
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-white">12</div>
+                  <div className="text-white/70 text-sm">Badges Earned</div>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-6 gap-3 mb-4">
+                {featuredBadges.concat(Array(3).fill(null)).map((badge, index) => (
+                  <div key={index} className="relative">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg border-2 border-white/30 ${
+                      badge ? 'bg-gradient-primary' : 'bg-white/10'
+                    }`}>
+                      {badge ? ['🏔️', '📸', '✈️', '🎯', '🌟', '💝'][index] : '🔒'}
+                    </div>
+                    {badge && (
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-secondary rounded-full border border-white text-xs flex items-center justify-center text-white font-bold">
+                        ✓
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="bg-white/10 rounded-2xl p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-white font-semibold">Progress to Legacy Level 1</span>
+                  <span className="text-white/80 text-sm">12/15 badges</span>
+                </div>
+                <div className="w-full bg-white/20 rounded-full h-3">
+                  <div className="bg-gradient-primary h-3 rounded-full transition-all duration-1000" style={{ width: '80%' }}></div>
+                </div>
+                <p className="text-white/80 text-sm mt-2">3 more badges until you unlock Legacy Level 1! 🏆</p>
+              </div>
             </div>
-            <p className="text-white/80 text-sm">12 Badges Earned • 3 More Until Legacy Level 1</p>
+            
+            <p className="text-white/90 text-base font-medium">
+              🎮 Gamify your life • 🌍 Make memories meaningful • ⚡ Leave a legacy worth remembering
+            </p>
           </div>
 
-          <div className="absolute bottom-10 w-full flex justify-center">
+          <div className="absolute bottom-8 w-full flex justify-center">
             <div className="animate-pulse-soft">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="32"
+                height="32"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-white"
+                className="text-white/60"
               >
                 <path d="M12 5v14M5 12l7 7 7-7" />
               </svg>
@@ -104,93 +143,122 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="bg-background py-20 md:py-28">
+      {/* How It Works Section */}
+      <section className="bg-gradient-soft py-24">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-3">
-            Your Digital <span className="text-gradient">Memory Passport</span>
-          </h2>
-          <p className="text-xl text-muted-foreground text-center max-w-3xl mx-auto mb-16">
-            Build your story while you're living it — never lose a meaningful moment again
-          </p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-black mb-4">
+              How It Works in <span className="text-gradient-primary">3 Steps</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Turn your life into a game worth playing — where every moment counts toward your legacy
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-muted/30 p-6 rounded-lg text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-imprint-100 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-imprint-600"
-                >
-                  <rect width="18" height="18" x="3" y="3" rx="2" />
-                  <path d="M9 13h6" />
-                  <path d="M9 17h6" />
-                  <path d="M9 9h6" />
-                </svg>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Step 1 */}
+            <div className="card-coral p-8 text-center group hover:scale-105 transition-all duration-300">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-coral rounded-full flex items-center justify-center text-3xl font-bold text-white shadow-coral group-hover:shadow-floating">
+                1
               </div>
-              <h3 className="text-xl font-display font-semibold mb-2">Co-Create Stories</h3>
-              <p className="text-muted-foreground">
-                Invite friends and family to contribute their perspectives, making your memories richer and more meaningful
+              <div className="text-5xl mb-4">🎯</div>
+              <h3 className="text-2xl font-display font-bold mb-4">Join a Challenge</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Pick from hundreds of life challenges — from "30 Days of Gratitude" to "Travel to 3 Countries" — and start your journey.
               </p>
             </div>
 
-            <div className="bg-muted/30 p-6 rounded-lg text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-memory-100 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-memory-600"
-                >
-                  <path d="M12.5 21a9.5 9.5 0 1 0 0-19 9.5 9.5 0 0 0 0 19Z" />
-                  <path d="M13.5 2.06c4.65.47 8.44 4.26 8.91 8.91" />
-                  <path d="M13.5 7.93a5.12 5.12 0 0 1 4.56 4.56" />
-                </svg>
+            {/* Step 2 */}
+            <div className="card-mint p-8 text-center group hover:scale-105 transition-all duration-300">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-mint rounded-full flex items-center justify-center text-3xl font-bold text-white shadow-mint group-hover:shadow-floating">
+                2
               </div>
-              <h3 className="text-xl font-display font-semibold mb-2">Collect & Celebrate</h3>
-              <p className="text-muted-foreground">
-                Turn life's moments into badges and achievements that showcase your unique journey and milestones
+              <div className="text-5xl mb-4">🏆</div>
+              <h3 className="text-2xl font-display font-bold mb-4">Earn NFT Badges</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Complete challenges to unlock unique Digital Memory NFT Badges — collectible proof of your growth and adventures.
               </p>
             </div>
 
-            <div className="bg-muted/30 p-6 rounded-lg text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-warmth-100 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-warmth-600"
-                >
-                  <path d="M3 8c0-3.5 2.58-1.29 4-1 3 .62 4 1.5 4 6 0 .5 0 4-4 5H7c-4 0-4-5-4-7Z" />
-                  <path d="M13 6.5c1-1 2.58-1.29 4-1 3 .62 4 1.5 4 6 0 .5 0 4-4 5H7" />
-                  <path d="M13 18v3" />
-                  <path d="M17.8 18c.2 0 .5-.2.7-.4.2-.2.3-.4.3-.7.1-.3 0-.5-.1-.7-.2-.2-.4-.4-.7-.5-.3-.1-.6 0-.8.1-.3.3.5.5.6.2.1.4.2.7.2Z" />
-                </svg>
+            {/* Step 3 */}
+            <div className="card-lavender p-8 text-center group hover:scale-105 transition-all duration-300">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-lavender rounded-full flex items-center justify-center text-3xl font-bold text-white shadow-lavender group-hover:shadow-floating">
+                3
               </div>
-              <h3 className="text-xl font-display font-semibold mb-2">Move Hearts</h3>
-              <p className="text-muted-foreground">
-                Give and receive imprints that create emotional connections and meaningful legacy threads across generations
+              <div className="text-5xl mb-4">📖</div>
+              <h3 className="text-2xl font-display font-bold mb-4">Build Your Legacy</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Store badges forever in your Digital Memory Passport — a beautiful, shareable record of your most meaningful moments.
               </p>
             </div>
+          </div>
+
+          <div className="text-center mt-16">
+            <div className="inline-flex items-center gap-8 bg-white/50 backdrop-blur-sm rounded-3xl p-6 shadow-card">
+              <div className="flex items-center gap-3">
+                <div className="text-2xl">⚡</div>
+                <span className="font-semibold text-foreground">Earn</span>
+              </div>
+              <div className="w-8 h-1 bg-gradient-primary rounded-full"></div>
+              <div className="flex items-center gap-3">
+                <div className="text-2xl">📤</div>
+                <span className="font-semibold text-foreground">Share</span>
+              </div>
+              <div className="w-8 h-1 bg-gradient-primary rounded-full"></div>
+              <div className="flex items-center gap-3">
+                <div className="text-2xl">🌟</div>
+                <span className="font-semibold text-foreground">Be Remembered Forever</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Challenges Preview */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-black mb-4">
+              Popular Life <span className="text-gradient-coral">Challenges</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Join thousands of people making their bucket lists come alive
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { emoji: "🙏", title: "30 Days of Gratitude", participants: "1,247 joined", bg: "bg-gradient-coral" },
+              { emoji: "📸", title: "Family Photo Archive", participants: "456 joined", bg: "bg-gradient-mint" },
+              { emoji: "✈️", title: "Travel 3 Countries", participants: "689 joined", bg: "bg-gradient-lavender" },
+              { emoji: "🧸", title: "Childhood Reflection", participants: "234 joined", bg: "bg-gradient-primary" }
+            ].map((challenge, index) => (
+              <div key={index} className="card-floating p-6 text-center group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <div className={`w-16 h-16 mx-auto mb-4 ${challenge.bg} rounded-full flex items-center justify-center text-2xl shadow-card group-hover:shadow-floating`}>
+                  {challenge.emoji}
+                </div>
+                <h3 className="text-lg font-display font-bold mb-2">{challenge.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{challenge.participants}</p>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="rounded-full border-coral/30 text-coral-foreground hover:bg-coral/10"
+                  onClick={() => navigate("/challenges")}
+                >
+                  Join Challenge
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button 
+              onClick={() => navigate("/challenges")}
+              className="text-lg px-10 py-6 bg-gradient-primary text-white border-0 rounded-3xl font-bold shadow-floating hover:shadow-coral transition-all duration-300 transform hover:scale-105"
+              size="lg"
+            >
+              🎮 Explore All Challenges
+            </Button>
           </div>
         </div>
       </section>
@@ -295,37 +363,59 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-[#1a1a2e] py-16 relative">
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-20 mix-blend-soft-light"></div>
+      {/* Final CTA Section */}
+      <section className="bg-gradient-hero py-20 relative">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-10 mix-blend-soft-light"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <img 
             src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
             alt="Imprintr Logo" 
-            className="h-16 w-auto mb-6 mx-auto"
+            className="h-20 w-auto mb-6 mx-auto"
           />
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
-            Imprintr
+          <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-4">
+            Ready to Leave Your Mark?
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8 font-medium">
-            Where Imprints Live Forever
+          <p className="text-xl text-white/90 max-w-4xl mx-auto mb-12 font-medium leading-relaxed">
+            Join the movement where memories become meaningful, moments become badges,<br />
+            and your story becomes an immortal legacy on the blockchain.
           </p>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
+          
+          <div className="flex flex-col md:flex-row justify-center gap-6 mb-16">
             <Button
               onClick={handleGetStarted}
-              className="text-lg px-8 py-6 bg-white hover:bg-white/90 text-imprint-600"
+              className="text-lg px-12 py-6 bg-white text-primary hover:bg-white/95 rounded-3xl font-black shadow-floating hover:shadow-coral transition-all duration-300 transform hover:scale-105"
               size="lg"
             >
-              Create Your Memory Passport
+              🌟 Start Your Memory Passport
             </Button>
             <Button
               onClick={() => navigate("/challenges")}
               variant="outline"
-              className="text-lg px-8 py-6 bg-transparent border-white text-white hover:bg-white/10"
+              className="text-lg px-12 py-6 bg-white/10 text-white border-white/30 hover:bg-white/20 rounded-3xl backdrop-blur-md font-black shadow-lg hover:shadow-xl transition-all duration-300"
               size="lg"
             >
-              Explore Challenges
+              🎮 Explore Life Challenges
             </Button>
+          </div>
+
+          {/* Web3 Technology Footer */}
+          <div className="pt-8 border-t border-white/20">
+            <p className="text-white/60 text-sm mb-6 font-medium">Powered by cutting-edge Web3 technology</p>
+            <div className="flex justify-center items-center gap-8 flex-wrap">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/20">
+                <span className="text-white font-bold text-lg">⚡ Aptos</span>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/20">
+                <span className="text-white font-bold text-lg">🔷 Base</span>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/20">
+                <span className="text-white font-bold text-lg">🎯 NFT</span>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/20">
+                <span className="text-white font-bold text-lg">🌐 Web3</span>
+              </div>
+            </div>
+            <p className="text-white/40 text-xs mt-6">Your badges live forever on the blockchain — truly owned by you.</p>
           </div>
         </div>
       </section>
