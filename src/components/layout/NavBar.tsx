@@ -53,9 +53,9 @@ export const NavBar = () => {
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
             <img 
-              src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
+              src="/lovable-uploads/94f5a903-86c9-45e8-ba9f-09cc9d91ad91.png" 
               alt="Imprintr Logo" 
-              className="h-8 w-auto"
+              className="h-8 w-auto hover:animate-pulse transition-all duration-300"
             />
             <span className="text-2xl font-bold text-primary">Imprintr</span>
           </Link>
@@ -157,7 +157,7 @@ export const NavBar = () => {
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <div className="flex items-center mb-8">
               <img 
-                src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
+                src="/lovable-uploads/94f5a903-86c9-45e8-ba9f-09cc9d91ad91.png" 
                 alt="Imprintr Logo" 
                 className="h-8 w-auto mr-2"
               />

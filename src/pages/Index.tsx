@@ -57,9 +57,9 @@ const Index = () => {
         
         <div className="relative container mx-auto px-4 py-16 flex flex-col justify-center items-center text-center min-h-screen">
           <img 
-            src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
+            src="/lovable-uploads/94f5a903-86c9-45e8-ba9f-09cc9d91ad91.png" 
             alt="Imprintr Logo" 
-            className="h-24 w-auto mb-6 animate-fade-in"
+            className="h-24 w-auto mb-6 animate-fade-in hover:animate-pulse"
           />
           
           <h1 className="text-5xl md:text-7xl font-display font-bold mb-4 animate-fade-in">
@@ -275,9 +275,9 @@ const Index = () => {
         <div className="absolute inset-0 bg-white/10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <img 
-            src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
+            src="/lovable-uploads/94f5a903-86c9-45e8-ba9f-09cc9d91ad91.png" 
             alt="Imprintr Logo" 
-            className="h-20 w-auto mb-6 mx-auto"
+            className="h-20 w-auto mb-6 mx-auto animate-pulse"
           />
           <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">
             Memories Worth Minting

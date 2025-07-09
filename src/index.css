@@ -216,4 +216,23 @@
     content: '';
     @apply absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-20 mix-blend-soft-light;
   }
+
+  /* Imprintr brand glow animation */
+  .imprintr-glow {
+    animation: imprintr-glow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes imprintr-glow {
+    from {
+      filter: drop-shadow(0 0 8px hsl(var(--coral) / 0.3));
+    }
+    to {
+      filter: drop-shadow(0 0 16px hsl(var(--coral) / 0.6));
+    }
+  }
+
+  /* Default badge styling */
+  .default-badge {
+    @apply w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-coral-400 to-lavender-500 shadow-lg;
+  }
 }
