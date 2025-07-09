@@ -173,7 +173,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-imprint-600 to-memory-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent;
   }
   
   /* New brand logo gradient for text */
@@ -182,11 +182,11 @@
   }
 
   .bg-gradient-light {
-    @apply bg-gradient-to-r from-imprint-100/80 via-warmth-50/50 to-memory-100/80;
+    @apply bg-gradient-to-r from-coral-100/80 via-peach-50/50 to-mint-100/80;
   }
 
   .bg-gradient-memory {
-    @apply bg-gradient-to-br from-imprint-400/90 via-imprint-500/80 to-memory-500/90;
+    @apply bg-gradient-to-br from-coral-400/90 via-coral-500/80 to-lavender-500/90;
   }
   
   /* New brand gradient background */
