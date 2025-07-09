@@ -8,13 +8,15 @@ import { StrictMode } from "react";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Auth from "./pages/Auth"; // Import the updated Auth page
+import Auth from "./pages/Auth";
 import Passport from "./pages/Passport";
 import NewImprint from "./pages/NewMemory";
 import About from "./pages/About";
 import Features from "./pages/Features";
 import NotFound from "./pages/NotFound";
 import Challenges from "./pages/Challenges";
+import ExploreChallenge from "./pages/ExploreChallenge";
+import CreateChallenge from "./pages/CreateChallenge";
 import WhyPartnerWithUs from "./pages/WhyPartnerWithUs";
 import Discover from "./pages/Discover";
 import BrandSignup from "./pages/brand/BrandSignup";
@@ -42,12 +44,13 @@ const App = () => (
               <Route path="/discover" element={<Discover />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/auth" element={<Auth />} /> {/* Add the Auth route */}
+              <Route path="/auth" element={<Auth />} />
               <Route path="/passport" element={<Passport />} />
               <Route path="/new-imprint" element={<NewImprint />} />
               <Route path="/about" element={<About />} />
               <Route path="/features" element={<Features />} />
-              <Route path="/challenges" element={<Challenges />} />
+              <Route path="/challenges" element={<ExploreChallenge />} />
+              <Route path="/create-challenge" element={<CreateChallenge />} />
               <Route path="/why-partner-with-us" element={<WhyPartnerWithUs />} />
               
               {/* Brand Routes */}

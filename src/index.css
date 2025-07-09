@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,93 +7,107 @@
 
 @layer base {
   :root {
-    --background: 30 30% 99%;
-    --foreground: 220 10% 20%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 10% 20%;
+    --card-foreground: 240 10% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 10% 20%;
+    --popover-foreground: 240 10% 15%;
 
-    --primary: 262 99% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 345 82% 75%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 350 85% 60%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 172 52% 80%;
+    --secondary-foreground: 240 10% 15%;
 
-    --muted: 220 10% 96%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 240 4% 96%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 30 95% 55%;
-    --accent-foreground: 220 10% 15%;
+    --accent: 45 100% 85%;
+    --accent-foreground: 240 10% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 10% 90%;
-    --input: 220 10% 90%;
-    --ring: 262 99% 60%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 345 82% 75%;
 
     --radius: 1rem;
 
-    --sidebar-background: 262 99% 98%;
-    --sidebar-foreground: 262 50% 30%;
-    --sidebar-primary: 262 99% 60%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 10% 15%;
+    --sidebar-primary: 345 82% 75%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 262 50% 95%;
-    --sidebar-accent-foreground: 262 80% 25%;
-    --sidebar-border: 262 50% 90%;
-    --sidebar-ring: 262 99% 60%;
+    --sidebar-accent: 240 4% 96%;
+    --sidebar-accent-foreground: 240 10% 15%;
+    --sidebar-border: 240 6% 90%;
+    --sidebar-ring: 345 82% 75%;
     
-    /* Added brand colors based on the logo */
-    --brand-blue: 210 100% 65%;
-    --brand-red: 350 100% 65%;
-    --brand-dark: 240 25% 15%;
+    /* Imprintr pastel color palette */
+    --coral: 345 82% 75%;
+    --mint: 172 52% 80%;
+    --lavender: 270 50% 85%;
+    --peach: 25 95% 85%;
+    --sky: 215 85% 85%;
+    --gold: 45 100% 70%;
+    --electric-blue: 210 100% 65%;
+    
+    /* Gradients */
+    --gradient-warm: linear-gradient(135deg, hsl(var(--coral)), hsl(var(--peach)));
+    --gradient-cool: linear-gradient(135deg, hsl(var(--mint)), hsl(var(--sky)));
+    --gradient-magical: linear-gradient(135deg, hsl(var(--lavender)), hsl(var(--coral)));
+    --gradient-glow: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--electric-blue)));
   }
 
   .dark {
-    --background: 220 20% 10%;
-    --foreground: 210 40% 98%;
+    --background: 240 10% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 220 20% 12%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 10%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 20% 12%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 10%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 262 80% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 345 82% 75%;
+    --primary-foreground: 240 10% 8%;
 
-    --secondary: 350 75% 55%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 172 52% 80%;
+    --secondary-foreground: 240 10% 8%;
 
-    --muted: 220 10% 20%;
-    --muted-foreground: 220 10% 70%;
+    --muted: 240 10% 15%;
+    --muted-foreground: 240 5% 70%;
 
-    --accent: 30 85% 50%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 100% 85%;
+    --accent-foreground: 240 10% 8%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 10% 25%;
-    --input: 220 10% 25%;
-    --ring: 262 80% 60%;
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 345 82% 75%;
 
-    --sidebar-background: 262 50% 15%;
-    --sidebar-foreground: 262 30% 90%;
-    --sidebar-primary: 262 80% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 262 40% 25%;
-    --sidebar-accent-foreground: 262 30% 90%;
-    --sidebar-border: 262 40% 25%;
-    --sidebar-ring: 262 80% 60%;
+    --sidebar-background: 240 10% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 345 82% 75%;
+    --sidebar-primary-foreground: 240 10% 8%;
+    --sidebar-accent: 240 10% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 10% 20%;
+    --sidebar-ring: 345 82% 75%;
     
-    /* Added brand colors based on the logo */
-    --brand-blue: 210 80% 55%;
-    --brand-red: 350 80% 55%;
-    --brand-dark: 240 25% 10%;
+    /* Imprintr pastel color palette - darker variants */
+    --coral: 345 82% 65%;
+    --mint: 172 52% 70%;
+    --lavender: 270 50% 75%;
+    --peach: 25 95% 75%;
+    --sky: 215 85% 75%;
+    --gold: 45 100% 60%;
+    --electric-blue: 210 100% 55%;
   }
 }
 
@@ -108,6 +122,38 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+  }
+  
+  /* Imprintr specific styles */
+  .badge-glow {
+    @apply shadow-lg shadow-primary/25 border border-primary/20;
+  }
+  
+  .confetti-effect {
+    animation: confetti 0.6s ease-out;
+  }
+  
+  @keyframes confetti {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(5deg); }
+    50% { transform: scale(1.05) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  
+  .memory-glow {
+    @apply shadow-lg shadow-accent/30;
+  }
+  
+  .gradient-text {
+    background: var(--gradient-magical);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .mobile-safe-area {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   .memory-card {
