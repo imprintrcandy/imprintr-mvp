@@ -1,18 +1,11 @@
-
 import { Link } from "react-router-dom";
-
 export const Footer = () => {
-  return (
-    <footer className="bg-muted/30 mt-auto">
+  return <footer className="bg-muted/30 mt-auto">
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center space-x-2">
-              <img 
-                src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
-                alt="Imprintr Logo" 
-                className="h-10 w-auto"
-              />
+              <img alt="Imprintr Logo" className="h-10 w-auto" src="/lovable-uploads/43406000-368b-4cd0-905c-6427be85218c.png" />
               <div className="flex flex-col">
                 <span className="text-xl font-display text-foreground font-bold">Imprintr</span>
                 <span className="text-xs text-muted-foreground">Where Imprints Live Forever</span>
@@ -120,6 +113,5 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
