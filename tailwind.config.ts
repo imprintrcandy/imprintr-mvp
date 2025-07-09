@@ -63,6 +63,27 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
+				// Enhanced warm, vibrant color palette
+				blush: {
+					DEFAULT: 'hsl(var(--blush))',
+					foreground: 'hsl(var(--blush-foreground))'
+				},
+				lavender: {
+					DEFAULT: 'hsl(var(--lavender))',
+					foreground: 'hsl(var(--lavender-foreground))'
+				},
+				sunset: {
+					DEFAULT: 'hsl(var(--sunset))',
+					foreground: 'hsl(var(--sunset-foreground))'
+				},
+				mint: {
+					DEFAULT: 'hsl(var(--mint))',
+					foreground: 'hsl(var(--mint-foreground))'
+				},
+				cream: {
+					DEFAULT: 'hsl(var(--cream))',
+					foreground: 'hsl(var(--cream-foreground))'
+				},
 				imprint: {
 					50: '#f5f3ff',
 					100: '#ede8ff',

@@ -35,7 +35,7 @@
     --input: 220 10% 90%;
     --ring: 262 99% 60%;
 
-    --radius: 1rem;
+    --radius: 1.5rem;
 
     --sidebar-background: 262 99% 98%;
     --sidebar-foreground: 262 50% 30%;
@@ -46,10 +46,28 @@
     --sidebar-border: 262 50% 90%;
     --sidebar-ring: 262 99% 60%;
     
-    /* Added brand colors based on the logo */
-    --brand-blue: 210 100% 65%;
-    --brand-red: 350 100% 65%;
-    --brand-dark: 240 25% 15%;
+    /* Enhanced brand colors - warm, vibrant palette */
+    --blush: 350 70% 85%;
+    --blush-foreground: 350 80% 25%;
+    --lavender: 270 50% 85%;
+    --lavender-foreground: 270 80% 25%;
+    --sunset: 25 90% 75%;
+    --sunset-foreground: 25 80% 25%;
+    --mint: 165 60% 80%;
+    --mint-foreground: 165 80% 25%;
+    --cream: 45 60% 95%;
+    --cream-foreground: 45 80% 25%;
+    
+    /* Gradient definitions */
+    --gradient-memory: linear-gradient(135deg, hsl(var(--blush)), hsl(var(--sunset)));
+    --gradient-badge: linear-gradient(135deg, hsl(var(--lavender)), hsl(var(--mint)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--sunset)) 100%);
+    
+    /* Shadow definitions */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --shadow-memory: 0 8px 30px rgba(234, 76, 98, 0.12);
+    --shadow-badge: 0 8px 30px rgba(149, 87, 255, 0.12);
+    --shadow-warm: 0 4px 15px rgba(255, 145, 29, 0.1);
   }
 
   .dark {
@@ -130,22 +148,36 @@
     @apply bg-gradient-to-r from-imprint-600 to-memory-500 bg-clip-text text-transparent;
   }
   
-  /* New brand logo gradient for text */
-  .brand-gradient-text {
-    @apply bg-gradient-to-r from-[#5eacee] to-[#ff6b81] bg-clip-text text-transparent;
-  }
-
-  .bg-gradient-light {
-    @apply bg-gradient-to-r from-imprint-100/80 via-warmth-50/50 to-memory-100/80;
-  }
-
-  .bg-gradient-memory {
-    @apply bg-gradient-to-br from-imprint-400/90 via-imprint-500/80 to-memory-500/90;
+  /* Enhanced gradient text for warm, vibrant feel */
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-sunset to-blush bg-clip-text text-transparent;
   }
   
-  /* New brand gradient background */
-  .bg-gradient-brand {
-    @apply bg-gradient-to-r from-[#5eacee] to-[#ff6b81];
+  .text-gradient-memory {
+    background: var(--gradient-memory);
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-badge {
+    background: var(--gradient-badge);
+    @apply bg-clip-text text-transparent;
+  }
+
+  /* Enhanced background gradients */
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-memory {
+    background: var(--gradient-memory);
+  }
+  
+  .bg-gradient-badge {
+    background: var(--gradient-badge);
+  }
+  
+  .bg-gradient-soft {
+    @apply bg-gradient-to-br from-cream via-blush/30 to-lavender/30;
   }
 
   .scroll-hidden::-webkit-scrollbar {

@@ -5,68 +5,114 @@ export const CHALLENGES: Challenge[] = [
   {
     id: "challenge-1",
     title: "30 Days of Gratitude",
-    description: "Document one thing you're grateful for each day for 30 days.",
+    description: "Document one thing you're grateful for each day for 30 days. Build a habit of mindfulness and appreciation.",
     category: "imprints",
     progress: 15,
     target: 30,
     status: "in-progress",
     participants: 128,
-    badgeId: "badge-gratitude"
+    badgeId: "badge-gratitude",
+    emoji: "🙏",
+    difficulty: "easy",
+    joinCount: 1247
   },
   {
     id: "challenge-2",
     title: "Family Photo Archive",
-    description: "Digitize and document 50 family photos with stories.",
+    description: "Digitize and document 50 family photos with their stories. Preserve your family's visual legacy.",
     category: "photos",
     progress: 3,
     target: 50,
     status: "in-progress",
     participants: 74,
-    badgeId: "badge-family"
+    badgeId: "badge-family",
+    emoji: "📸",
+    difficulty: "medium",
+    joinCount: 456
   },
   {
     id: "challenge-3",
     title: "First Imprint Challenge",
-    description: "Create your first 5 imprints with photos and stories.",
+    description: "Create your first 5 imprints with photos and stories. Perfect for beginners!",
     category: "imprints",
     progress: 5,
     target: 5,
     status: "completed",
     participants: 543,
-    badgeId: "badge-firststeps"
+    badgeId: "badge-firststeps",
+    emoji: "🌟",
+    difficulty: "easy",
+    joinCount: 2891
   },
   {
     id: "challenge-4",
     title: "Travel Memories",
-    description: "Document imprints from 3 different countries you've visited.",
+    description: "Document imprints from 3 different countries you've visited. Share your global adventures.",
     category: "imprints",
     progress: 0,
     target: 3,
     status: "not-started",
     participants: 89,
-    badgeId: "badge-3"
+    badgeId: "badge-3",
+    emoji: "✈️",
+    difficulty: "medium",
+    joinCount: 689
   },
   {
     id: "challenge-5",
     title: "Childhood Reflection",
-    description: "Create 10 imprints about your most formative childhood experiences.",
+    description: "Create 10 imprints about your most formative childhood experiences. Reconnect with your inner child.",
     category: "imprints",
     progress: 0,
     target: 10,
     status: "not-started",
     participants: 156,
-    badgeId: "badge-childhood"
+    badgeId: "badge-childhood",
+    emoji: "🧸",
+    difficulty: "medium",
+    joinCount: 234
   },
   {
     id: "challenge-6",
     title: "Legacy Letters",
-    description: "Write 5 legacy letters to future generations of your family.",
+    description: "Write 5 legacy letters to future generations of your family. Create a timeless gift.",
     category: "imprints",
     progress: 1,
     target: 5,
     status: "in-progress",
     deadline: "2025-12-31",
     participants: 42,
-    badgeId: "badge-legacy"
+    badgeId: "badge-legacy",
+    emoji: "💌",
+    difficulty: "epic",
+    joinCount: 123
+  },
+  {
+    id: "challenge-7",
+    title: "Mindful Moments",
+    description: "Capture 20 moments of pure mindfulness and presence. Find peace in the everyday.",
+    category: "imprints",
+    progress: 0,
+    target: 20,
+    status: "not-started",
+    participants: 201,
+    badgeId: "badge-mindful",
+    emoji: "🧘‍♀️",
+    difficulty: "easy",
+    joinCount: 567
+  },
+  {
+    id: "challenge-8",
+    title: "Adventure Seeker",
+    description: "Document 15 outdoor adventures and nature experiences. Get outside and explore!",
+    category: "imprints",
+    progress: 0,
+    target: 15,
+    status: "not-started",
+    participants: 189,
+    badgeId: "badge-adventure",
+    emoji: "🏔️",
+    difficulty: "epic",
+    joinCount: 892
   }
 ];

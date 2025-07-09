@@ -17,40 +17,70 @@ const Index = () => {
 
   return (
     <MainLayout hideNav>
-      {/* Hero Section with new branding */}
-      <section className="relative h-screen">
-        <div className="absolute inset-0 bg-[#1a1a2e]"></div>
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-30 mix-blend-soft-light"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/70"></div>
+      {/* Hero Section - Apple meets Notion aesthetic */}
+      <section className="relative min-h-screen bg-gradient-hero">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/6bb7a26a-c3b2-45cd-8e68-b0f2a36872e3.png')] bg-contain bg-center opacity-20 mix-blend-soft-light"></div>
+        
+        <div className="relative container mx-auto px-4 min-h-screen flex flex-col justify-center items-center text-center z-10">
+          <div className="animate-fade-in">
+            <img 
+              src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
+              alt="Imprintr Logo" 
+              className="h-24 md:h-32 w-auto mb-4"
+            />
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-4">
+              Imprintr
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 mb-8 font-medium">
+              Where Imprints Live Forever
+            </p>
+          </div>
 
-        <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-center z-10">
-          <img 
-            src="/lovable-uploads/4fee875d-fccc-4054-b0cb-81fc66458a43.png" 
-            alt="Imprintr Logo" 
-            className="h-32 w-auto mb-6 animate-fade-in"
-          />
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 animate-fade-in">
-            <span className="text-gradient">Imprintr</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mb-10 animate-fade-in font-medium">
-            Where Imprints Live Forever
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 animate-fade-in mt-8">
+          <div className="animate-fade-in max-w-4xl mb-12">
+            <h2 className="text-2xl md:text-3xl font-display font-semibold text-white mb-6">
+              Where Your Memories Earn Badges That Last Forever
+            </h2>
+            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+              Create life challenges • Earn Digital Memory NFT Badges • Build your Digital Memory Passport • Leave a legacy worth remembering
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in mb-16">
             <Button
               onClick={handleGetStarted}
-              className="text-lg px-8 py-6"
+              className="text-lg px-8 py-6 bg-white text-primary hover:bg-white/90 rounded-2xl font-semibold shadow-xl"
               size="lg"
             >
-              Start Your Imprint Journey
+              🌟 Start Your Memory Passport
             </Button>
             <Button
-              onClick={() => navigate("/features")}
+              onClick={() => navigate("/challenges")}
               variant="outline"
-              className="text-lg px-8 py-6 bg-white/10 text-white border-white/30 hover:bg-white/20"
+              className="text-lg px-8 py-6 bg-white/10 text-white border-white/30 hover:bg-white/20 rounded-2xl backdrop-blur-sm"
               size="lg"
             >
-              See How It Works
+              🎯 Join a Challenge
             </Button>
+          </div>
+
+          {/* Digital Passport Preview */}
+          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 max-w-2xl animate-fade-in border border-white/20">
+            <h3 className="text-xl font-display font-semibold text-white mb-4">
+              ✨ Your Digital Memory Passport Preview
+            </h3>
+            <div className="grid grid-cols-4 gap-4 mb-4">
+              {featuredBadges.map((badge, index) => (
+                <div key={badge.id} className="relative">
+                  <div className="w-16 h-16 bg-gradient-badge rounded-full flex items-center justify-center text-2xl shadow-lg">
+                    {['🏔️', '📸', '✈️'][index]}
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-sunset rounded-full border-2 border-white text-xs flex items-center justify-center text-white font-bold">
+                    ✓
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-white/80 text-sm">12 Badges Earned • 3 More Until Legacy Level 1</p>
           </div>
 
           <div className="absolute bottom-10 w-full flex justify-center">

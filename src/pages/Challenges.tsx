@@ -52,49 +52,63 @@ const Challenges = () => {
     <MainLayout>
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-          <h1 className="text-3xl font-display font-bold">Imprint Challenges</h1>
-          <Button className="mt-4 sm:mt-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 mr-2"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-            Create Challenge
+          <div>
+            <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">
+              Life <span className="text-gradient-warm">Challenges</span>
+            </h1>
+            <p className="text-muted-foreground">
+              Join challenges • Earn badges • Build your legacy
+            </p>
+          </div>
+          <Button className="mt-4 sm:mt-0 bg-gradient-memory text-white border-0 rounded-2xl px-6 py-3 font-semibold shadow-lg hover:shadow-xl transition-all">
+            ✨ Create Challenge
           </Button>
         </div>
         
-        <div className="mb-6">
-          <p className="text-muted-foreground">
-            Join imprint challenges to document specific types of memories, earn badges, and connect with others. 
-            Complete challenges to unlock exclusive badges and grow your digital legacy.
-          </p>
+        <div className="bg-gradient-soft rounded-3xl p-8 mb-8 border border-blush/20">
+          <div className="text-center">
+            <h2 className="text-xl font-display font-semibold mb-2">🎯 Ready to leave your mark?</h2>
+            <p className="text-muted-foreground">
+              Complete challenges to unlock exclusive Digital Memory NFT Badges and grow your digital legacy
+            </p>
+          </div>
         </div>
         
-        <div className="mb-8 flex flex-col sm:flex-row gap-4">
-          <div className="w-full sm:w-64">
-            <Input
-              placeholder="Search challenges..."
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              className="w-full"
-            />
+        {/* Search and Filters */}
+        <div className="mb-8 space-y-6">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="w-full sm:w-64">
+              <Input
+                placeholder="🔍 Search challenges..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                className="w-full rounded-2xl border-blush/30 focus:border-sunset"
+              />
+            </div>
+            
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <TabsList className="grid grid-cols-4 w-full sm:w-auto bg-cream/50 rounded-2xl p-1">
+                <TabsTrigger value="all" className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm">All</TabsTrigger>
+                <TabsTrigger value="not-started" className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm">Available</TabsTrigger>
+                <TabsTrigger value="in-progress" className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm">In Progress</TabsTrigger>
+                <TabsTrigger value="completed" className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm">Completed</TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
-          
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid grid-cols-4 w-full sm:w-auto">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="not-started">Available</TabsTrigger>
-              <TabsTrigger value="in-progress">In Progress</TabsTrigger>
-              <TabsTrigger value="completed">Completed</TabsTrigger>
-            </TabsList>
-          </Tabs>
+
+          {/* Category Filter Chips */}
+          <div className="flex flex-wrap gap-2">
+            {['🔥 Trending', '✨ New', '🏃‍♀️ Solo', '👥 Group', '✈️ Travel', '🧘‍♀️ Self-Care', '🌍 Community', '🙏 Spiritual'].map((category) => (
+              <Button
+                key={category}
+                variant="outline"
+                size="sm"
+                className="rounded-full border-blush/30 hover:bg-blush/20 hover:border-blush text-xs px-4 py-2"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
