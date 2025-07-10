@@ -52,7 +52,7 @@ export const useChallengeFilters = () => {
     return filtered;
   }, [activeTab, searchQuery, selectedRegion, selectedProvince, citySearch]);
 
-  const hasLocationFilters = selectedRegion || selectedProvince || citySearch;
+  const hasLocationFilters = Boolean(selectedRegion || selectedProvince || citySearch);
   const locationFilterText = [selectedRegion, selectedProvince, citySearch].filter(Boolean).join(" / ");
 
   const clearLocationFilters = () => {

@@ -2,53 +2,62 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import MainLayout from "@/components/layout/MainLayout";
+import { MainLayout } from "@/components/layout/MainLayout";
 import { ChallengePageHeader } from "@/components/challenge/ChallengePageHeader";
 import { ChallengeSearchFilters } from "@/components/challenge/ChallengeSearchFilters";
 import { ChallengeGrid } from "@/components/challenge/ChallengeGrid";
 import { useChallengeFilters } from "@/hooks/useChallengeFilters";
+import { Challenge } from "@/components/challenge/ChallengeCard";
 
 const Challenges = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const { 
-    selectedCategory, 
-    setSelectedCategory, 
-    selectedDifficulty, 
-    setSelectedDifficulty,
+    activeTab,
+    searchQuery,
     selectedRegion,
+    selectedProvince,
+    citySearch,
+    filteredChallenges,
+    hasLocationFilters,
+    locationFilterText,
+    setActiveTab,
+    setSearchQuery,
     setSelectedRegion,
-    showFeaturedOnly,
-    setShowFeaturedOnly,
-    showCompletedOnly,
-    setShowCompletedOnly
+    setSelectedProvince,
+    setCitySearch,
+    clearLocationFilters,
+    clearAllFilters
   } = useChallengeFilters();
 
-  const { data: challenges = [], isLoading, error } = useQuery({
-    queryKey: ['challenges', selectedCategory, selectedDifficulty, selectedRegion, searchTerm, showFeaturedOnly, showCompletedOnly],
+  // Transform Supabase challenge data to match ChallengeCard interface
+  const transformChallengeData = (supabaseChallenge: any): Challenge => {
+    return {
+      id: supabaseChallenge.id,
+      title: supabaseChallenge.title,
+      description: supabaseChallenge.description,
+      category: supabaseChallenge.category,
+      progress: 0, // Default progress since not tracked in Supabase yet
+      target: 1, // Default target
+      status: "not-started" as const,
+      participants: supabaseChallenge.participants_count || 0,
+      location: supabaseChallenge.region,
+      badgeId: supabaseChallenge.id // Use challenge id as badge id for now
+    };
+  };
+
+  const { data: supabaseChallenges = [], isLoading, error } = useQuery({
+    queryKey: ['challenges', selectedRegion, selectedProvince, citySearch, searchQuery],
     queryFn: async () => {
       let query = supabase
         .from('challenges')
         .select('*')
         .eq('status', 'active');
 
-      if (selectedCategory && selectedCategory !== 'all') {
-        query = query.eq('category', selectedCategory);
-      }
-      
-      if (selectedDifficulty && selectedDifficulty !== 'all') {
-        query = query.eq('difficulty', selectedDifficulty);
-      }
-      
-      if (selectedRegion && selectedRegion !== 'all') {
+      if (selectedRegion) {
         query = query.eq('region', selectedRegion);
       }
       
-      if (searchTerm) {
-        query = query.or(`title.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`);
-      }
-      
-      if (showFeaturedOnly) {
-        query = query.eq('featured', true);
+      if (searchQuery) {
+        query = query.or(`title.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%`);
       }
 
       const { data, error } = await query.order('created_at', { ascending: false });
@@ -58,28 +67,23 @@ const Challenges = () => {
     },
   });
 
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
+  // Transform and filter challenges
+  const transformedChallenges = supabaseChallenges.map(transformChallengeData);
+  const finalChallenges = filteredChallenges.length > 0 ? filteredChallenges : transformedChallenges;
+
+  const handleJoin = (challengeId: string) => {
+    console.log('Joining challenge:', challengeId);
+    // TODO: Implement challenge joining logic
   };
 
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
+  const handleContinue = (challengeId: string) => {
+    console.log('Continuing challenge:', challengeId);
+    // TODO: Implement challenge continuation logic
   };
 
-  const handleDifficultyChange = (difficulty: string) => {
-    setSelectedDifficulty(difficulty);
-  };
-
-  const handleRegionChange = (region: string) => {
-    setSelectedRegion(region);
-  };
-
-  const handleFeaturedToggle = (featured: boolean) => {
-    setShowFeaturedOnly(featured);
-  };
-
-  const handleCompletedToggle = (completed: boolean) => {
-    setShowCompletedOnly(completed);
+  const handleView = (challengeId: string) => {
+    console.log('Viewing challenge:', challengeId);
+    // TODO: Implement challenge viewing logic
   };
 
   return (
@@ -89,25 +93,26 @@ const Challenges = () => {
           <ChallengePageHeader />
           
           <ChallengeSearchFilters
-            searchTerm={searchTerm}
-            onSearchChange={handleSearch}
-            selectedCategory={selectedCategory}
-            onCategoryChange={handleCategoryChange}
-            selectedDifficulty={selectedDifficulty}
-            onDifficultyChange={handleDifficultyChange}
-            selectedRegion={selectedRegion}
-            onRegionChange={handleRegionChange}
-            showFeaturedOnly={showFeaturedOnly}
-            onFeaturedToggle={handleFeaturedToggle}
-            showCompletedOnly={showCompletedOnly}
-            onCompletedToggle={handleCompletedToggle}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            hasLocationFilters={!!hasLocationFilters}
+            locationFilterText={locationFilterText}
+            onClearLocationFilters={clearLocationFilters}
+            filteredCount={finalChallenges.length}
           />
 
-          <ChallengeGrid 
-            challenges={challenges}
-            isLoading={isLoading}
-            error={error}
-          />
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ChallengeGrid 
+              challenges={finalChallenges}
+              hasLocationFilters={!!hasLocationFilters}
+              onJoin={handleJoin}
+              onContinue={handleContinue}
+              onView={handleView}
+              onClearAllFilters={clearAllFilters}
+            />
+          </div>
         </div>
       </div>
     </MainLayout>
