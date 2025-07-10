@@ -13,6 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/components/ui/sonner";
+import { useSecureAuth } from "@/hooks/useSecureAuth";
 
 interface Role {
   value: string;
@@ -48,24 +49,31 @@ const ROLE_CONFIG: Record<string, Role> = {
 
 export const RoleSwitcher = () => {
   const { user } = useAuth();
+  const { userRole, isAdmin } = useSecureAuth();
   const navigate = useNavigate();
   const [activeRole, setActiveRole] = useState<string>("user");
   const [userRoles, setUserRoles] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      // Get roles from user metadata or default to user
-      const roles = user.user_metadata?.roles || ["user"];
-      const currentRole = user.user_metadata?.active_role || "user";
-      
-      setUserRoles(roles);
-      setActiveRole(currentRole);
+    if (user && userRole) {
+      // For super_admin users, give them access to both user and super_admin roles
+      if (userRole === 'super_admin') {
+        setUserRoles(['user', 'super_admin']);
+        // Get active role from localStorage or default to current role
+        const storedActiveRole = localStorage.getItem("active_role");
+        setActiveRole(storedActiveRole && ['user', 'super_admin'].includes(storedActiveRole) ? storedActiveRole : 'super_admin');
+      } else {
+        // For regular users, only show their role if they have additional roles
+        // This can be expanded later when you add brand partners, etc.
+        setUserRoles([userRole]);
+        setActiveRole(userRole);
+      }
     }
-  }, [user]);
+  }, [user, userRole]);
 
-  // Only show if user has multiple roles
-  if (!user || userRoles.length <= 1) {
+  // Show role switcher for super_admin users (who have multiple roles available)
+  if (!user || !isAdmin || userRoles.length <= 1) {
     return null;
   }
 
@@ -74,19 +82,9 @@ export const RoleSwitcher = () => {
 
     setLoading(true);
     try {
-      // Update user metadata with new active role
-      const { error } = await supabase.auth.updateUser({
-        data: {
-          ...user.user_metadata,
-          active_role: newRole
-        }
-      });
-
-      if (error) throw error;
-
       setActiveRole(newRole);
       
-      // Store in localStorage as backup
+      // Store in localStorage
       localStorage.setItem("active_role", newRole);
       
       // Redirect to appropriate dashboard

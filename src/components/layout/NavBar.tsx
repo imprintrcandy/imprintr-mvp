@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,15 @@ export const NavBar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-  const { isAdmin } = useSecureAuth();
+  const { isAdmin, userRole } = useSecureAuth();
+
+  // Debug logging
+  console.log("NavBar Debug:", { 
+    user: !!user, 
+    isAdmin, 
+    userRole,
+    userEmail: user?.email 
+  });
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -119,7 +128,14 @@ export const NavBar = () => {
         <div className="hidden md:flex items-center gap-4">
           {user ? (
             <>
-              {/* Role Switcher - only shows if user has multiple roles */}
+              {/* Debug info - remove this after testing */}
+              {isAdmin && (
+                <div className="text-xs bg-red-100 px-2 py-1 rounded">
+                  Admin: {userRole}
+                </div>
+              )}
+              
+              {/* Role Switcher - shows for super_admin users */}
               <RoleSwitcher />
               
               <DropdownMenu>
