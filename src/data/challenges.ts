@@ -11,7 +11,8 @@ export const CHALLENGES: Challenge[] = [
     target: 30,
     status: "in-progress",
     participants: 128,
-    badgeId: "badge-gratitude"
+    badgeId: "badge-gratitude",
+    location: "NCR" // Added location
   },
   {
     id: "challenge-2",
@@ -22,7 +23,8 @@ export const CHALLENGES: Challenge[] = [
     target: 50,
     status: "in-progress",
     participants: 74,
-    badgeId: "badge-family"
+    badgeId: "badge-family",
+    location: "Central Visayas" // Added location
   },
   {
     id: "challenge-3",
@@ -33,7 +35,8 @@ export const CHALLENGES: Challenge[] = [
     target: 5,
     status: "completed",
     participants: 543,
-    badgeId: "badge-firststeps"
+    badgeId: "badge-firststeps",
+    location: "NCR" // Added location
   },
   {
     id: "challenge-4",
@@ -44,7 +47,8 @@ export const CHALLENGES: Challenge[] = [
     target: 3,
     status: "not-started",
     participants: 89,
-    badgeId: "badge-3"
+    badgeId: "badge-3",
+    location: "Central Visayas" // Added location
   },
   {
     id: "challenge-5",
@@ -55,7 +59,8 @@ export const CHALLENGES: Challenge[] = [
     target: 10,
     status: "not-started",
     participants: 156,
-    badgeId: "badge-childhood"
+    badgeId: "badge-childhood",
+    location: "Davao Region" // Added location
   },
   {
     id: "challenge-6",
@@ -67,6 +72,7 @@ export const CHALLENGES: Challenge[] = [
     status: "in-progress",
     deadline: "2025-12-31",
     participants: 42,
-    badgeId: "badge-legacy"
+    badgeId: "badge-legacy",
+    location: "Davao Region" // Added location
   }
 ];

@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface Challenge {
@@ -15,6 +16,7 @@ export interface Challenge {
   status: "not-started" | "in-progress" | "completed";
   participants?: number;
   badgeId?: string;
+  location?: string; // Added location field
 }
 
 interface ChallengeCardProps {
@@ -68,6 +70,12 @@ export const ChallengeCard = ({
             {statusText}
           </Badge>
         </div>
+        {challenge.location && (
+          <div className="flex items-center gap-1 mt-1">
+            <MapPin className="h-3 w-3 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground">{challenge.location}</span>
+          </div>
+        )}
       </CardHeader>
       
       <CardContent className="p-4 pt-2 flex-1">
