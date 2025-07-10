@@ -32,6 +32,7 @@ export const PhilippinesMap = ({ selectedRegion, onRegionSelect, className }: Ph
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
 
   const handleRegionClick = (regionName: string) => {
+    console.log("Map region clicked:", regionName); // Debug log
     if (selectedRegion === regionName) {
       onRegionSelect(""); // Deselect if already selected
     } else {
@@ -53,12 +54,18 @@ export const PhilippinesMap = ({ selectedRegion, onRegionSelect, className }: Ph
   };
 
   return (
-    <div className={cn("w-full max-w-2xl mx-auto", className)}>
-      {/* Simplified Philippines SVG Map */}
+    <div className={cn("w-full max-w-2xl mx-auto bg-background", className)}>
+      {/* Debug info */}
+      <div className="mb-2 text-xs text-muted-foreground text-center">
+        Map loaded • Selected: {selectedRegion || "None"} • Hover: {hoveredRegion || "None"}
+      </div>
+      
+      {/* Philippines SVG Map */}
       <svg
         viewBox="0 0 400 600"
-        className="w-full h-auto"
+        className="w-full h-auto border border-border rounded-lg bg-background"
         xmlns="http://www.w3.org/2000/svg"
+        style={{ minHeight: "300px" }}
       >
         <defs>
           <filter id="glow">
@@ -76,7 +83,7 @@ export const PhilippinesMap = ({ selectedRegion, onRegionSelect, className }: Ph
           <circle
             cx="200"
             cy="280"
-            r="8"
+            r="12"
             className={cn("cursor-pointer", getRegionStyle("NCR"))}
             onClick={() => handleRegionClick("NCR")}
             onMouseEnter={() => setHoveredRegion("NCR")}

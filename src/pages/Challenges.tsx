@@ -36,17 +36,9 @@ const Challenges = () => {
       );
     }
     
-    // Filter by region (mock implementation - in real app this would use challenge.location)
+    // Filter by region
     if (selectedRegion) {
-      // For demo purposes, randomly assign some challenges to regions
-      const regionChallenges = {
-        "NCR": ["challenge-1", "challenge-3"],
-        "Central Visayas": ["challenge-2", "challenge-4"],
-        "Davao Region": ["challenge-5", "challenge-6"]
-      };
-      
-      const challengeIds = regionChallenges[selectedRegion as keyof typeof regionChallenges] || [];
-      filtered = filtered.filter(challenge => challengeIds.includes(challenge.id));
+      filtered = filtered.filter(challenge => challenge.location === selectedRegion);
     }
     
     return filtered;
@@ -54,20 +46,18 @@ const Challenges = () => {
 
   const handleJoinChallenge = (challengeId: string) => {
     toast.success("You've joined the challenge!");
-    // In a real app, this would update the challenge status
   };
 
   const handleContinueChallenge = (challengeId: string) => {
     toast.info("Continuing with your challenge!");
-    // In a real app, this would navigate to the challenge interface
   };
 
   const handleViewResults = (challengeId: string) => {
     toast.info("Viewing challenge results!");
-    // In a real app, this would navigate to the results page
   };
 
   const handleRegionSelect = (region: string) => {
+    console.log("Region selected:", region); // Debug log
     setSelectedRegion(region || null);
   };
 
@@ -107,7 +97,7 @@ const Challenges = () => {
           </p>
         </div>
 
-        {/* Map and Region Filter Section */}
+        {/* Map and Region Filter Section - Always Visible */}
         <Card className="mb-8">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -120,7 +110,6 @@ const Challenges = () => {
                   variant={showMap ? "default" : "outline"}
                   size="sm"
                   onClick={() => setShowMap(true)}
-                  className="hidden md:flex"
                 >
                   <Map className="h-4 w-4 mr-2" />
                   Map View
@@ -129,7 +118,6 @@ const Challenges = () => {
                   variant={!showMap ? "default" : "outline"}
                   size="sm"
                   onClick={() => setShowMap(false)}
-                  className="hidden md:flex"
                 >
                   <Filter className="h-4 w-4 mr-2" />
                   List View
@@ -150,32 +138,25 @@ const Challenges = () => {
               </div>
             )}
           </CardHeader>
-          <CardContent>
-            {/* Desktop Map View */}
-            <div className="hidden md:block">
-              {showMap ? (
+          <CardContent className="min-h-[400px]">
+            {/* Map is now always rendered, just toggled between views */}
+            {showMap ? (
+              <div className="w-full flex justify-center">
                 <PhilippinesMap
                   selectedRegion={selectedRegion}
                   onRegionSelect={handleRegionSelect}
                   className="max-w-lg mx-auto"
                 />
-              ) : (
+              </div>
+            ) : (
+              <div className="w-full max-w-md mx-auto">
                 <RegionDropdown
                   selectedRegion={selectedRegion}
                   onRegionSelect={handleRegionSelect}
-                  className="max-w-md mx-auto"
+                  className="w-full"
                 />
-              )}
-            </div>
-            
-            {/* Mobile Dropdown */}
-            <div className="md:hidden">
-              <RegionDropdown
-                selectedRegion={selectedRegion}
-                onRegionSelect={handleRegionSelect}
-                className="w-full"
-              />
-            </div>
+              </div>
+            )}
           </CardContent>
         </Card>
         
