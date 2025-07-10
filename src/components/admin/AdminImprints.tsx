@@ -39,11 +39,11 @@ const AdminImprints = () => {
         .from("imprints")
         .select(`
           *,
-          from_user:from_user_id!inner (
+          from_user:Users!imprints_from_user_id_fkey (
             name,
             email
           ),
-          to_user:to_user_id!inner (
+          to_user:Users!imprints_to_user_id_fkey (
             name,
             email
           )
@@ -51,7 +51,7 @@ const AdminImprints = () => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setImprints(data || []);
+      setImprints(data as any || []);
     } catch (error) {
       console.error("Error fetching imprints:", error);
       toast({ title: "Error", description: "Failed to fetch imprints", variant: "destructive" });

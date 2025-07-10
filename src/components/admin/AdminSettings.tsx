@@ -177,7 +177,7 @@ The Imprintr Team`
             Email Templates
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            Customize automated emails sent to users. Use variables like {{user_name}}, {{challenge_title}}, etc.
+            Customize automated emails sent to users. Use variables like user_name, challenge_title, etc.
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -228,12 +228,12 @@ The Imprintr Team`
           <div className="bg-muted p-4 rounded-lg">
             <h4 className="font-medium mb-2">Available Variables:</h4>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm text-muted-foreground">
-              <code>{"{{user_name}}"}</code>
-              <code>{"{{challenge_title}}"}</code>
-              <code>{"{{badge_title}}"}</code>
-              <code>{"{{earned_date}}"}</code>
-              <code>{"{{challenge_url}}"}</code>
-              <code>{"{{passport_url}}"}</code>
+              <span>{"{{user_name}}"}</span>
+              <span>{"{{challenge_title}}"}</span>
+              <span>{"{{badge_title}}"}</span>
+              <span>{"{{earned_date}}"}</span>
+              <span>{"{{challenge_url}}"}</span>
+              <span>{"{{passport_url}}"}</span>
             </div>
           </div>
 

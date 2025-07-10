@@ -43,10 +43,10 @@ const AdminSubmissions = () => {
         .from("proof_submissions")
         .select(`
           *,
-          challenge:challenge_id!inner (
+          challenge:challenges (
             title
           ),
-          user:user_id!inner (
+          user:Users (
             name,
             email
           )
@@ -54,7 +54,7 @@ const AdminSubmissions = () => {
         .order("submitted_at", { ascending: false });
 
       if (error) throw error;
-      setSubmissions(data || []);
+      setSubmissions(data as any || []);
     } catch (error) {
       console.error("Error fetching submissions:", error);
       toast({ title: "Error", description: "Failed to fetch submissions", variant: "destructive" });
