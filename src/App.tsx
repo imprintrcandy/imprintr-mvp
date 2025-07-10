@@ -28,6 +28,8 @@ import BrandVerification from "./pages/brand/BrandVerification";
 import BrandProfile from "./pages/brand/BrandProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Profile from "./pages/Profile";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import { AuthProvider } from "./contexts/AuthContext";
 
 // Create a new QueryClient instance outside of component rendering
@@ -47,6 +49,8 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/passport" element={<Passport />} />
               <Route path="/new-imprint" element={<NewImprint />} />
               <Route path="/about" element={<About />} />
