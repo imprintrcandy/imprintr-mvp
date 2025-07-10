@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useSecureAuth } from "@/hooks/useSecureAuth";
+import { RoleSwitcher } from "@/components/auth/RoleSwitcher";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -118,69 +118,74 @@ export const NavBar = () => {
         {/* Desktop Auth Buttons */}
         <div className="hidden md:flex items-center gap-4">
           {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="rounded-full p-0 h-10 w-10">
-                  <Avatar>
-                    <AvatarFallback className="bg-primary text-primary-foreground">
-                      {user.email?.charAt(0).toUpperCase() || "U"}
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="sr-only">Open user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-64 bg-background border shadow-lg">
-                {/* User Info Header */}
-                <div className="flex items-center justify-start gap-3 p-3 border-b">
-                  <Avatar className="h-10 w-10">
-                    <AvatarFallback className="bg-primary text-primary-foreground text-sm">
-                      {user.email?.charAt(0).toUpperCase() || "U"}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{getUserDisplayName()}</p>
-                    <p className="text-xs text-muted-foreground">{user.email}</p>
-                    <p className="text-xs text-primary font-medium">({getUserRole()})</p>
-                  </div>
-                </div>
-
-                {/* User Dashboard Menu Items */}
-                {userMenuItems.map((item) => (
-                  <DropdownMenuItem key={item.path} asChild>
-                    <Link to={item.path} className="cursor-pointer flex items-center">
-                      <item.icon className="mr-3 h-4 w-4" />
-                      <span>{item.name}</span>
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-
-                {/* Super Admin Menu Items - Conditional */}
-                {isAdmin && (
-                  <>
-                    <DropdownMenuSeparator />
-                    <div className="px-2 py-1">
-                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                        Admin Access
-                      </p>
+            <>
+              {/* Role Switcher - only shows if user has multiple roles */}
+              <RoleSwitcher />
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="rounded-full p-0 h-10 w-10">
+                    <Avatar>
+                      <AvatarFallback className="bg-primary text-primary-foreground">
+                        {user.email?.charAt(0).toUpperCase() || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="sr-only">Open user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-64 bg-background border shadow-lg">
+                  {/* User Info Header */}
+                  <div className="flex items-center justify-start gap-3 p-3 border-b">
+                    <Avatar className="h-10 w-10">
+                      <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+                        {user.email?.charAt(0).toUpperCase() || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{getUserDisplayName()}</p>
+                      <p className="text-xs text-muted-foreground">{user.email}</p>
+                      <p className="text-xs text-primary font-medium">({getUserRole()})</p>
                     </div>
-                    {adminMenuItems.map((item) => (
-                      <DropdownMenuItem key={item.path} asChild>
-                        <Link to={item.path} className="cursor-pointer flex items-center">
-                          <item.icon className="mr-3 h-4 w-4" />
-                          <span>{item.name}</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </>
-                )}
+                  </div>
 
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive focus:text-destructive">
-                  <LogOut className="mr-3 h-4 w-4" />
-                  <span>Sign out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  {/* User Dashboard Menu Items */}
+                  {userMenuItems.map((item) => (
+                    <DropdownMenuItem key={item.path} asChild>
+                      <Link to={item.path} className="cursor-pointer flex items-center">
+                        <item.icon className="mr-3 h-4 w-4" />
+                        <span>{item.name}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+
+                  {/* Super Admin Menu Items - Conditional */}
+                  {isAdmin && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <div className="px-2 py-1">
+                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                          Admin Access
+                        </p>
+                      </div>
+                      {adminMenuItems.map((item) => (
+                        <DropdownMenuItem key={item.path} asChild>
+                          <Link to={item.path} className="cursor-pointer flex items-center">
+                            <item.icon className="mr-3 h-4 w-4" />
+                            <span>{item.name}</span>
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </>
+                  )}
+
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive focus:text-destructive">
+                    <LogOut className="mr-3 h-4 w-4" />
+                    <span>Sign out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
           ) : (
             authLinks.map((link) => (
               <Link key={link.path} to={link.path}>
@@ -253,6 +258,11 @@ export const NavBar = () => {
                       <p className="text-xs text-muted-foreground truncate">{user.email}</p>
                       <p className="text-xs text-primary font-medium">({getUserRole()})</p>
                     </div>
+                  </div>
+
+                  {/* Mobile Role Switcher */}
+                  <div className="mb-4">
+                    <RoleSwitcher />
                   </div>
 
                   {/* Mobile User Menu Items */}
