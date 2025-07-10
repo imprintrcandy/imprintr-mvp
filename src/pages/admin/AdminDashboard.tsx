@@ -1,9 +1,6 @@
-import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useNavigate } from "react-router-dom";
-import { toast } from "@/hooks/use-toast";
+import { AdminRoute } from "@/components/security/AdminRoute";
+import { useSecureAuth } from "@/hooks/useSecureAuth";
 import AdminOverview from "@/components/admin/AdminOverview";
 import AdminUsers from "@/components/admin/AdminUsers";
 import AdminChallenges from "@/components/admin/AdminChallenges";
@@ -24,76 +21,18 @@ import {
 } from "lucide-react";
 
 const AdminDashboard = () => {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const checkAdminAccess = async () => {
-      if (!user) {
-        navigate("/auth");
-        return;
-      }
-
-      try {
-        const { data: userData, error } = await supabase
-          .from("Users")
-          .select("role")
-          .eq("id", user.id)
-          .single();
-
-        if (error) {
-          console.error("Error fetching user role:", error);
-          toast({ title: "Error", description: "Failed to verify admin access", variant: "destructive" });
-          navigate("/");
-          return;
-        }
-
-        if (userData?.role !== 'super_admin') {
-          toast({ title: "Access Denied", description: "You don't have admin permissions", variant: "destructive" });
-          navigate("/");
-          return;
-        }
-
-        setUserRole(userData.role);
-      } catch (error) {
-        console.error("Error checking admin access:", error);
-        navigate("/");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAdminAccess();
-  }, [user, navigate]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin w-8 h-8 border-4 border-coral-300 border-t-coral-600 rounded-full mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Verifying admin access...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!userRole || userRole !== 'super_admin') {
-    return null;
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-mint-50 to-lavender-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-coral-600 to-peach-600 bg-clip-text text-transparent">
-            Imprintr Super Admin
-          </h1>
-          <p className="text-muted-foreground mt-2">
-            Control center for memory badge governance and franchise oversight
-          </p>
-        </div>
+    <AdminRoute>
+      <div className="min-h-screen bg-gradient-to-br from-mint-50 to-lavender-50">
+        <div className="container mx-auto px-4 py-8">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-coral-600 to-peach-600 bg-clip-text text-transparent">
+              Imprintr Super Admin
+            </h1>
+            <p className="text-muted-foreground mt-2">
+              Control center for memory badge governance and franchise oversight
+            </p>
+          </div>
 
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 mb-8">
@@ -165,6 +104,7 @@ const AdminDashboard = () => {
         </Tabs>
       </div>
     </div>
+    </AdminRoute>
   );
 };
 

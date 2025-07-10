@@ -3,6 +3,8 @@ import { useState, ChangeEvent } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { validateFile } from "@/lib/security";
+import { toast } from "@/hooks/use-toast";
 
 interface ImageUploadProps {
   imageUrl: string;
@@ -13,6 +15,19 @@ export const ImageUpload = ({ imageUrl, setImageUrl }: ImageUploadProps) => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      
+      // Validate file security
+      const validation = validateFile(file);
+      if (!validation.valid) {
+        toast({
+          title: "Invalid File",
+          description: validation.error,
+          variant: "destructive",
+        });
+        e.target.value = ''; // Clear the input
+        return;
+      }
+      
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target?.result) {

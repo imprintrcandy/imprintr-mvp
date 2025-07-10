@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { SecureContent } from "@/components/security/SecureContent";
 
 export interface Imprint {
   id: string;
@@ -58,11 +59,21 @@ export const ImprintCard = ({ imprint, className }: ImprintCardProps) => {
         </div>
       </div>
       <CardHeader className="p-4 pb-0">
-        <h3 className="text-lg font-semibold line-clamp-1">{imprint.title}</h3>
+        <SecureContent 
+          content={imprint.title} 
+          type="text" 
+          className="text-lg font-semibold line-clamp-1" 
+          maxLength={100}
+        />
         <p className="text-sm text-muted-foreground">{new Date(imprint.date).toLocaleDateString()}</p>
       </CardHeader>
       <CardContent className="p-4">
-        <p className="text-sm line-clamp-2">{imprint.description}</p>
+        <SecureContent 
+          content={imprint.description} 
+          type="text" 
+          className="text-sm line-clamp-2" 
+          maxLength={200}
+        />
       </CardContent>
       <CardFooter className="p-4 pt-0 flex flex-wrap gap-2">
         {imprint.tags.map((tag) => (
