@@ -8,10 +8,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/components/ui/sonner";
 import { useSecureAuth } from "@/hooks/useSecureAuth";
 
@@ -19,30 +17,34 @@ interface Role {
   value: string;
   label: string;
   icon: React.ComponentType<any>;
-  color: string;
+  bgColor: string;
+  textColor: string;
   redirectPath: string;
 }
 
 const ROLE_CONFIG: Record<string, Role> = {
   user: {
     value: "user",
-    label: "User",
+    label: "Attendee",
     icon: User,
-    color: "bg-pink-500",
+    bgColor: "bg-green-600",
+    textColor: "text-white",
     redirectPath: "/profile/@username"
   },
   super_admin: {
     value: "super_admin",
-    label: "Super Admin",
+    label: "Admin",
     icon: Shield,
-    color: "bg-red-500",
+    bgColor: "bg-red-600",
+    textColor: "text-white",
     redirectPath: "/admin"
   },
   brand: {
     value: "brand",
-    label: "Partner Brand",
+    label: "Exhibitor",
     icon: Building2,
-    color: "bg-blue-500",
+    bgColor: "bg-blue-600",
+    textColor: "text-white",
     redirectPath: "/brand/dashboard"
   }
 };
@@ -107,22 +109,23 @@ export const RoleSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="gap-2 min-w-fit">
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${currentRoleConfig?.color || 'bg-gray-500'}`} />
-            <CurrentIcon className="h-4 w-4" />
-            <span className="hidden sm:inline">Active Role: {currentRoleConfig?.label}</span>
-            <span className="sm:hidden">{currentRoleConfig?.label}</span>
+        <Button 
+          variant="outline" 
+          className={`gap-3 min-w-[200px] justify-between h-12 rounded-lg border-2 ${currentRoleConfig?.bgColor} ${currentRoleConfig?.textColor} hover:opacity-90 transition-all`}
+          disabled={loading}
+        >
+          <div className="flex items-center gap-3">
+            <CurrentIcon className="h-5 w-5" />
+            <div className="flex flex-col items-start">
+              <span className="text-xs opacity-80">Active Role:</span>
+              <span className="font-medium">{currentRoleConfig?.label}</span>
+            </div>
           </div>
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       
-      <DropdownMenuContent align="end" className="w-56 bg-background border shadow-lg">
-        <div className="p-2 border-b">
-          <p className="text-sm font-medium text-muted-foreground">Switch Role</p>
-        </div>
-        
+      <DropdownMenuContent align="end" className="w-56 bg-background border shadow-lg p-2">        
         {userRoles.map((role) => {
           const roleConfig = ROLE_CONFIG[role];
           if (!roleConfig) return null;
@@ -135,18 +138,22 @@ export const RoleSwitcher = () => {
               key={role}
               onClick={() => handleRoleSwitch(role)}
               disabled={loading}
-              className={`cursor-pointer flex items-center gap-3 ${
-                isActive ? 'bg-muted' : ''
+              className={`cursor-pointer rounded-lg mb-2 last:mb-0 p-4 h-auto ${
+                roleConfig.bgColor
+              } ${roleConfig.textColor} hover:opacity-90 transition-all ${
+                isActive ? 'ring-2 ring-white ring-opacity-50' : ''
               }`}
+              asChild
             >
-              <div className={`w-3 h-3 rounded-full ${roleConfig.color}`} />
-              <RoleIcon className="h-4 w-4" />
-              <span className="flex-1">{roleConfig.label}</span>
-              {isActive && (
-                <Badge variant="secondary" className="text-xs">
-                  Active
-                </Badge>
-              )}
+              <div className="flex items-center gap-3 w-full">
+                <RoleIcon className="h-5 w-5 flex-shrink-0" />
+                <span className="font-medium flex-1">{roleConfig.label}</span>
+                {isActive && (
+                  <div className="flex items-center justify-center w-5 h-5 bg-white bg-opacity-20 rounded-full">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+                )}
+              </div>
             </DropdownMenuItem>
           );
         })}
