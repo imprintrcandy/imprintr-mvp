@@ -31,6 +31,8 @@ import Profile from "./pages/Profile";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import { AuthProvider } from "./contexts/AuthContext";
+import { AdminRoute } from "./components/security/AdminRoute";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 
 // Create a new QueryClient instance outside of component rendering
 const queryClient = new QueryClient();
@@ -51,8 +53,22 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/passport" element={<Passport />} />
-              <Route path="/new-imprint" element={<NewImprint />} />
+              <Route 
+                path="/passport" 
+                element={
+                  <ProtectedRoute>
+                    <Passport />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/new-imprint" 
+                element={
+                  <ProtectedRoute>
+                    <NewImprint />
+                  </ProtectedRoute>
+                } 
+              />
               <Route path="/about" element={<About />} />
               <Route path="/features" element={<Features />} />
               <Route path="/challenges" element={<ExploreChallenge />} />
@@ -62,14 +78,56 @@ const App = () => (
               {/* Brand Routes */}
               <Route path="/brand/signup" element={<BrandSignup />} />
               <Route path="/brand/login" element={<BrandLogin />} />
-              <Route path="/brand/dashboard" element={<BrandDashboard />} />
-              <Route path="/brand/challenges" element={<BrandChallenges />} />
-              <Route path="/brand/visitors" element={<BrandVisitors />} />
-              <Route path="/brand/verification" element={<BrandVerification />} />
-              <Route path="/brand/profile" element={<BrandProfile />} />
+              <Route 
+                path="/brand/dashboard" 
+                element={
+                  <ProtectedRoute requiresBrand={true}>
+                    <BrandDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/brand/challenges" 
+                element={
+                  <ProtectedRoute requiresBrand={true}>
+                    <BrandChallenges />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/brand/visitors" 
+                element={
+                  <ProtectedRoute requiresBrand={true}>
+                    <BrandVisitors />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/brand/verification" 
+                element={
+                  <ProtectedRoute requiresBrand={true}>
+                    <BrandVerification />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/brand/profile" 
+                element={
+                  <ProtectedRoute requiresBrand={true}>
+                    <BrandProfile />
+                  </ProtectedRoute>
+                } 
+              />
               
-              {/* Admin Route */}
-              <Route path="/admin" element={<AdminDashboard />} />
+              {/* Admin Route - NOW PROPERLY PROTECTED */}
+              <Route 
+                path="/admin" 
+                element={
+                  <AdminRoute>
+                    <AdminDashboard />
+                  </AdminRoute>
+                } 
+              />
               
               {/* Profile Routes */}
               <Route path="/profile/:username" element={<Profile />} />
