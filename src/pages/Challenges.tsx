@@ -2,21 +2,23 @@
 import { useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { ChallengeCard } from "@/components/challenge/ChallengeCard";
+import { LocationFilters } from "@/components/challenge/LocationFilters";
 import { CHALLENGES } from "@/data/challenges";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/sonner";
-import { PhilippinesMap } from "@/components/map/PhilippinesMap";
-import { RegionDropdown } from "@/components/map/RegionDropdown";
-import { Map, Filter } from "lucide-react";
+import { Map, Filter, Search } from "lucide-react";
 
 const Challenges = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  
+  // Location filter states
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
-  const [showMap, setShowMap] = useState(true);
+  const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
+  const [citySearch, setCitySearch] = useState("");
   
   const filterChallenges = () => {
     let filtered = [...CHALLENGES];
@@ -26,7 +28,7 @@ const Challenges = () => {
       filtered = filtered.filter(challenge => challenge.status === activeTab);
     }
     
-    // Filter by search query
+    // Filter by search query in title/description/category
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(challenge => 
@@ -39,6 +41,22 @@ const Challenges = () => {
     // Filter by region
     if (selectedRegion) {
       filtered = filtered.filter(challenge => challenge.location === selectedRegion);
+    }
+    
+    // Filter by province (check if location includes the province name)
+    if (selectedProvince) {
+      filtered = filtered.filter(challenge => 
+        challenge.location && challenge.location.toLowerCase().includes(selectedProvince.toLowerCase())
+      );
+    }
+    
+    // Filter by city search (check location and description)
+    if (citySearch) {
+      const cityQuery = citySearch.toLowerCase();
+      filtered = filtered.filter(challenge => 
+        (challenge.location && challenge.location.toLowerCase().includes(cityQuery)) ||
+        challenge.description.toLowerCase().includes(cityQuery)
+      );
     }
     
     return filtered;
@@ -56,12 +74,14 @@ const Challenges = () => {
     toast.info("Viewing challenge results!");
   };
 
-  const handleRegionSelect = (region: string) => {
-    console.log("Region selected:", region); // Debug log
-    setSelectedRegion(region || null);
+  const handleClearLocationFilters = () => {
+    setSelectedRegion(null);
+    setSelectedProvince(null);
+    setCitySearch("");
   };
 
   const filteredChallenges = filterChallenges();
+  const hasLocationFilters = selectedRegion || selectedProvince || citySearch;
 
   return (
     <MainLayout>
@@ -97,128 +117,101 @@ const Challenges = () => {
           </p>
         </div>
 
-        {/* Map and Region Filter Section - Always Visible */}
-        <Card className="mb-8">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Map className="h-5 w-5 text-imprint-600" />
-                Explore by Region
-              </CardTitle>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant={showMap ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setShowMap(true)}
-                >
-                  <Map className="h-4 w-4 mr-2" />
-                  Map View
-                </Button>
-                <Button
-                  variant={!showMap ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setShowMap(false)}
-                >
-                  <Filter className="h-4 w-4 mr-2" />
-                  List View
-                </Button>
-              </div>
-            </div>
-            {selectedRegion && (
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-sm text-muted-foreground">Filtering by:</span>
-                <Button 
-                  variant="secondary" 
-                  size="sm"
-                  onClick={() => setSelectedRegion(null)}
-                  className="h-6 px-2 text-xs"
-                >
-                  {selectedRegion} ✕
-                </Button>
-              </div>
-            )}
-          </CardHeader>
-          <CardContent className="min-h-[400px]">
-            {/* Map is now always rendered, just toggled between views */}
-            {showMap ? (
-              <div className="w-full flex justify-center">
-                <PhilippinesMap
-                  selectedRegion={selectedRegion}
-                  onRegionSelect={handleRegionSelect}
-                  className="max-w-lg mx-auto"
-                />
-              </div>
-            ) : (
-              <div className="w-full max-w-md mx-auto">
-                <RegionDropdown
-                  selectedRegion={selectedRegion}
-                  onRegionSelect={handleRegionSelect}
-                  className="w-full"
-                />
-              </div>
-            )}
-          </CardContent>
-        </Card>
-        
-        <div className="mb-8 flex flex-col sm:flex-row gap-4">
-          <div className="w-full sm:w-64">
-            <Input
-              placeholder="Search challenges..."
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              className="w-full"
+        {/* Desktop Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Sidebar Filters - Desktop */}
+          <div className="lg:col-span-1 space-y-6">
+            <LocationFilters
+              selectedRegion={selectedRegion}
+              selectedProvince={selectedProvince}
+              citySearch={citySearch}
+              onRegionChange={setSelectedRegion}
+              onProvinceChange={setSelectedProvince}
+              onCitySearchChange={setCitySearch}
+              onClearFilters={handleClearLocationFilters}
             />
           </div>
-          
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid grid-cols-4 w-full sm:w-auto">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="not-started">Available</TabsTrigger>
-              <TabsTrigger value="in-progress">In Progress</TabsTrigger>
-              <TabsTrigger value="completed">Completed</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
-        
-        {/* Results Summary */}
-        <div className="mb-6">
-          <p className="text-sm text-muted-foreground">
-            {selectedRegion ? (
-              <>Showing {filteredChallenges.length} challenges in <strong>{selectedRegion}</strong></>
-            ) : (
-              <>Showing {filteredChallenges.length} challenges across all regions</>
-            )}
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredChallenges.map(challenge => (
-            <ChallengeCard 
-              key={challenge.id} 
-              challenge={challenge} 
-              onJoin={handleJoinChallenge}
-              onContinue={handleContinueChallenge}
-              onView={handleViewResults}
-            />
-          ))}
-          
-          {filteredChallenges.length === 0 && (
-            <div className="col-span-3 text-center py-12">
-              <Map className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-lg font-medium mb-2">No challenges found</h3>
-              <p className="text-muted-foreground mb-4">
-                {selectedRegion 
-                  ? `No challenges match your criteria in ${selectedRegion}.`
-                  : "No challenges match your criteria."
-                }
+
+          {/* Main Content */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Search and Status Filters */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="w-full sm:w-64">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search challenges..."
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+              
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                <TabsList className="grid grid-cols-4 w-full sm:w-auto">
+                  <TabsTrigger value="all">All</TabsTrigger>
+                  <TabsTrigger value="not-started">Available</TabsTrigger>
+                  <TabsTrigger value="in-progress">In Progress</TabsTrigger>
+                  <TabsTrigger value="completed">Completed</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+            
+            {/* Results Summary */}
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-muted-foreground">
+                {hasLocationFilters ? (
+                  <>
+                    Showing {filteredChallenges.length} challenges for{" "}
+                    {[selectedRegion, selectedProvince, citySearch].filter(Boolean).join(" / ")}
+                  </>
+                ) : (
+                  <>Showing {filteredChallenges.length} challenges across all regions</>
+                )}
               </p>
-              {selectedRegion && (
-                <Button variant="outline" onClick={() => setSelectedRegion(null)}>
-                  View All Regions
+              
+              {hasLocationFilters && (
+                <Button variant="outline" size="sm" onClick={handleClearLocationFilters}>
+                  <X className="h-4 w-4 mr-2" />
+                  Clear Location Filters
                 </Button>
               )}
             </div>
-          )}
+            
+            {/* Challenge Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredChallenges.map(challenge => (
+                <ChallengeCard 
+                  key={challenge.id} 
+                  challenge={challenge} 
+                  onJoin={handleJoinChallenge}
+                  onContinue={handleContinueChallenge}
+                  onView={handleViewResults}
+                />
+              ))}
+              
+              {filteredChallenges.length === 0 && (
+                <div className="col-span-full text-center py-12">
+                  <Map className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <h3 className="text-lg font-medium mb-2">No challenges found</h3>
+                  <p className="text-muted-foreground mb-4">
+                    {hasLocationFilters 
+                      ? `No challenges match your location criteria.`
+                      : "No challenges match your search criteria."
+                    }
+                  </p>
+                  <Button variant="outline" onClick={() => {
+                    setSearchQuery("");
+                    setActiveTab("all");
+                    handleClearLocationFilters();
+                  }}>
+                    Clear All Filters
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </MainLayout>
