@@ -27,6 +27,7 @@ import BrandVisitors from "./pages/brand/BrandVisitors";
 import BrandVerification from "./pages/brand/BrandVerification";
 import BrandProfile from "./pages/brand/BrandProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import Profile from "./pages/Profile";
 import { AuthProvider } from "./contexts/AuthContext";
 
 // Create a new QueryClient instance outside of component rendering
@@ -65,6 +66,9 @@ const App = () => (
               
               {/* Admin Route */}
               <Route path="/admin" element={<AdminDashboard />} />
+              
+              {/* Profile Routes */}
+              <Route path="/profile/:username" element={<Profile />} />
               
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
