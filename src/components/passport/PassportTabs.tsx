@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProfileSidebar } from "@/components/profile/ProfileSidebar";
 import { ImprintsList } from "./ImprintsList";
 import { BadgesList } from "./BadgesList";
 import { ImprintsMade } from "./ImprintsMade";
@@ -24,66 +24,43 @@ interface PassportTabsProps {
 export const PassportTabs = ({ imprints, badges, challenges, testimonials }: PassportTabsProps) => {
   const [activeTab, setActiveTab] = useState("imprints");
 
+  const renderContent = () => {
+    switch (activeTab) {
+      case "imprints":
+        return <ImprintsList imprints={imprints} />;
+      case "badges":
+        return <BadgesList badges={badges} />;
+      case "imprints-made":
+        return <ImprintsMade testimonials={testimonials.slice(0, 3)} />;
+      case "imprints-received":
+        return <ImprintsReceived testimonials={testimonials.slice(3, 6)} />;
+      case "challenges":
+        return <ChallengesList challenges={challenges} />;
+      case "map":
+        return <MemoryMapView />;
+      case "referrals":
+        return <ReferralStatus />;
+      case "vault":
+        return <LegacyVault />;
+      default:
+        return <ImprintsList imprints={imprints} />;
+    }
+  };
+
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <TabsList className="grid grid-cols-8 mb-8">
-        <TabsTrigger value="imprints" className="font-medium">
-          Imprints
-        </TabsTrigger>
-        <TabsTrigger value="badges" className="font-medium">
-          Badges
-        </TabsTrigger>
-        <TabsTrigger value="imprints-made" className="font-medium">
-          Imprints I've Made
-        </TabsTrigger>
-        <TabsTrigger value="imprints-received" className="font-medium">
-          Imprints That Moved Me
-        </TabsTrigger>
-        <TabsTrigger value="challenges" className="font-medium">
-          Challenges
-        </TabsTrigger>
-        <TabsTrigger value="map" className="font-medium">
-          Memory Map
-        </TabsTrigger>
-        <TabsTrigger value="referrals" className="font-medium">
-          Referrals
-        </TabsTrigger>
-        <TabsTrigger value="vault" className="font-medium">
-          Legacy Vault
-        </TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="imprints" className="space-y-6">
-        <ImprintsList imprints={imprints} />
-      </TabsContent>
-
-      <TabsContent value="badges" className="space-y-6">
-        <BadgesList badges={badges} />
-      </TabsContent>
-
-      <TabsContent value="imprints-made" className="space-y-6">
-        <ImprintsMade testimonials={testimonials.slice(0, 3)} />
-      </TabsContent>
-
-      <TabsContent value="imprints-received" className="space-y-6">
-        <ImprintsReceived testimonials={testimonials.slice(3, 6)} />
-      </TabsContent>
-
-      <TabsContent value="challenges" className="space-y-6">
-        <ChallengesList challenges={challenges} />
-      </TabsContent>
-
-      <TabsContent value="map" className="space-y-6">
-        <MemoryMapView />
-      </TabsContent>
-
-      <TabsContent value="referrals" className="space-y-6">
-        <ReferralStatus />
-      </TabsContent>
-
-      <TabsContent value="vault" className="space-y-6">
-        <LegacyVault />
-      </TabsContent>
-    </Tabs>
+    <div className="flex gap-8">
+      {/* Sidebar */}
+      <ProfileSidebar 
+        activeTab={activeTab} 
+        onTabChange={setActiveTab}
+      />
+      
+      {/* Main Content */}
+      <div className="flex-1 min-w-0">
+        <div className="animate-fade-in">
+          {renderContent()}
+        </div>
+      </div>
+    </div>
   );
 };
