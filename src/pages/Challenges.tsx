@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { ChallengeCard } from "@/components/challenge/ChallengeCard";
@@ -9,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/sonner";
-import { Map, Filter, Search } from "lucide-react";
+import { Map, Filter, Search, X } from "lucide-react";
 
 const Challenges = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
